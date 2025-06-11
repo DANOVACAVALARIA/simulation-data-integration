@@ -1,0 +1,16 @@
+{
+  "name": "collector-dis",
+  "version": "1.2.3",
+  "main": "collector-dis.js",
+  "type": "module",
+  "scripts": {
+    "collector-dis": "node collector-dis.js"
+  },
+  "author": "JNDN",
+  "license": "MIT",
+  "description": "Data recorder for DIS protocol",
+  "dependencies": {
+    "minio": "^8.0.5",
+    "ws": "^8.18.2"
+  }
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal SSFTer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container-fluid {
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-row {
+            height: 48%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card {
+            width: 23%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card-image {
+            height: 60%;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card-body {
+            height: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .card-text {
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 10px;
+        }
+
+        .card-body button {
+            width: 90%;
+            align-self: center;
+        }
+
+        .card-body button i {
+            margin-left: 5px;
+        }
+
+        .button-container {
+            height: 60px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card-container" id="cardContainer"></div>
+        <div class="button-container">
+            <button class="btn btn-secondary" onclick="window.location.href = 'index.html';">Voltar</button>
+        </div>
+    </div>
+
+    <script>
+        const services = [
+            {
+                title: "Autenticador",
+                img: "./img/keycloak.jpg",
+                description: "Atenticação e autorização para os usuários do sistema.",
+                link: "http://keycloak.local",
+            },
+            {
+                title: "Wiki",
+                img: "./img/wikijs.jpg",
+                description: "Portal e Wiki para documentação técnica e de exercícios.",
+                link: "http://wikijs.local",
+            },
+            {
+                title: "Ciência de Dados",
+                img: "./img/jupyterhub.jpg",
+                description: "Análise, mineração e aprendizado profundo de dados.",
+                link: "http://jupyterhub.local",
+            },
+            {
+                title: "Análise de Dados",
+                img: "./img/superset.jpg",
+                description: "Relatórios e dashboards de visualização de dados.",
+                link: "http://superset.local",
+            },
+            {
+                title: "Orquestrador",
+                img: "./img/airflow.jpg",
+                description: "Automatização dos complexos fluxos de tarefas.",
+                link: "http://airflow.local",
+            },
+            {
+                title: "Transformador",
+                img: "./img/spark.jpg",
+                description: "Processamento massivo de dados.",
+                link: "http://spark.local",
+            },
+            {
+                title: "Lakehouse",
+                img: "./img/dremio.jpg",
+                description: "Plataforma para consultas escaláveis de dados.",
+                link: "http://dremio.local",
+            },
+            {
+                title: "Armazenador",
+                img: "./img/minio.jpg",
+                description: "Armazenador de objetos para os dados coletados.",
+                link: "http://minio.local",
+            },
+        ];
+
+        function loadCards() {
+            const cardContainer = document.getElementById("cardContainer");
+            const maxCards = 8;
+            const selectedServices = services.slice(0, maxCards);
+
+            for (let row = 0; row < 2; row++) {
+                const cardRow = document.createElement("div");
+                cardRow.classList.add("card-row");
+
+                for (let col = 0; col < 4; col++) {
+                    const index = row * 4 + col;
+                    const service = selectedServices[index];
+
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.innerHTML = `
+                        <div class="card-image" style="background-image: url('${service.img}')"></div>
+                        <div class="card-body">
+                            <p class="card-text">${service.description}</p>
+                            <button class="btn btn-primary btn-sm" onclick="window.open('${service.link}', '_blank')">
+                                Acessar <i class="bi bi-lock-fill"></i>
+                            </button>
+                        </div>
+                    `;
+                    cardRow.appendChild(card);
+                }
+                cardContainer.appendChild(cardRow);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadCards);
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

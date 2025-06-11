@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Exercícios</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, #007bff, #0056b3);
+      border: none;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+    }
+    .empty-state {
+      padding: 3rem;
+      text-align: center;
+    }
+    .stats-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .stats-card h3 {
+      color: #007bff;
+      font-weight: bold;
+    }
+    .drop-zone {
+      border: 3px dashed #007bff;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .drop-zone:hover {
+      border-color: #0056b3;
+      background-color: #f8f9ff;
+    }
+    .drop-zone.dragover {
+      border-color: #28a745;
+      background-color: #f0fff0;
+    }
+    .file-item, .simulation-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      border: 1px solid #e9ecef;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+    .simulation-selector {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e9ecef;
+      border-radius: 5px;
+    }
+    .simulation-option {
+      padding: 0.75rem;
+      border-bottom: 1px solid #f1f1f1;
+      cursor: pointer;
+    }
+    .simulation-option:hover {
+      background-color: #f8f9fa;
+    }
+    .simulation-option:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <h1 class="h3 mb-1">
+          <i class="fas fa-shield-alt text-primary me-2"></i>
+          Gerenciador de Exercícios
+        </h1>
+        <p class="text-muted">Sistema de apoio a exercícios de simulação de combate</p>
+      </div>
+      <div class="col-md-4 text-end">
+        <button class="btn btn-primary btn-lg" id="createExerciseBtn">
+          <i class="fas fa-plus me-2"></i>Criar Exercício
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="stats-card text-center">
+          <h3 id="totalExercises">-</h3>
+          <p class="mb-0">Total de Exercícios</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card text-center">
+          <h3 id="totalSimulations">-</h3>
+          <p class="mb-0">Simulações</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card text-center">
+          <h3 id="activeExercises">-</h3>
+          <p class="mb-0">Exercícios Ativos</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stats-card text-center">
+          <h3 id="totalDocuments">-</h3>
+          <p class="mb-0">Documentos</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercises Table -->
+    <div class="card mb-4">
+      <div class="card-header bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-flag text-primary me-2"></i>Exercícios
+          </h5>
+          <input type="text" class="form-control" id="searchInput" placeholder="Buscar..." style="width: 300px;">
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Nome</th>
+                <th>Origem</th>
+                <th>Força Adestrada</th>
+                <th>Período</th>
+                <th>Status</th>
+                <th>Docs</th>
+                <th>Sims</th>
+                <th width="120">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="exerciseTableBody">
+              <tr>
+                <td colspan="8" class="text-center py-5">
+                  <div class="empty-state">
+                    <i class="fas fa-flag text-muted fa-3x mb-3"></i>
+                    <h6 class="text-muted">Nenhum exercício encontrado</h6>
+                    <p class="text-muted">Clique em "Criar Exercício" para começar</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulations Table (only show if there are unassociated simulations) -->
+    <div class="card" id="simulationsCard" style="display: none;">
+      <div class="card-header bg-white">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-sitemap text-info me-2"></i>Simulações Não Associadas
+        </h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Origem</th>
+                <th>Caminho</th>
+                <th>Data</th>
+                <th width="100">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="simulationTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise Modal -->
+  <div class="modal fade" id="exerciseModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-plus me-2"></i>Criar Exercício
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Form Section -->
+            <div class="col-lg-6">
+              <form id="exerciseForm">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label class="form-label fw-bold">Nome do Exercício *</label>
+                    <input type="text" class="form-control" id="exerciseName" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-bold">Descrição *</label>
+                    <textarea class="form-control" id="exerciseDescription" rows="3" required></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Tipo de Simulação</label>
+                    <select class="form-select" id="simulationType">
+                      <option value="">Selecione...</option>
+                      <option value="viva">Viva</option>
+                      <option value="virtual">Virtual</option>
+                      <option value="construtiva">Construtiva</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Origem</label>
+                    <select class="form-select" id="origin">
+                      <option value="">Selecione...</option>
+                      <option value="CA-SUL">CA-SUL</option>
+                      <option value="CA-LESTE">CA-LESTE</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Data de Início</label>
+                    <input type="date" class="form-control" id="startDate">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Data de Término</label>
+                    <input type="date" class="form-control" id="endDate">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-bold">Força Adestrada</label>
+                    <input type="text" class="form-control" id="trainedForce">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-bold">URL da Wiki</label>
+                    <input type="url" class="form-control" id="wikiUrl" placeholder="https://...">
+                  </div>
+                </div>
+                <input type="hidden" id="exerciseId">
+              </form>
+            </div>
+
+            <!-- Documents and Simulations Section -->
+            <div class="col-lg-6">
+              <!-- Documents -->
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="mb-0"><i class="fas fa-file-alt text-info me-2"></i>Documentos</h6>
+                  <button type="button" class="btn btn-info btn-sm" id="addDocumentBtn">
+                    <i class="fas fa-plus me-1"></i>Adicionar
+                  </button>
+                </div>
+                <div id="documentsList" class="border rounded p-3" style="min-height: 120px; max-height: 200px; overflow-y: auto;">
+                  <div class="text-center text-muted py-3">
+                    <i class="fas fa-file-upload fa-2x mb-2"></i>
+                    <p class="mb-0">Nenhum documento</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simulations -->
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="mb-0"><i class="fas fa-sitemap text-warning me-2"></i>Simulações</h6>
+                  <button type="button" class="btn btn-warning btn-sm" id="addSimulationBtn">
+                    <i class="fas fa-link me-1"></i>Associar
+                  </button>
+                </div>
+                <div id="simulationsList" class="border rounded p-3" style="min-height: 120px; max-height: 200px; overflow-y: auto;">
+                  <div class="text-center text-muted py-3">
+                    <i class="fas fa-project-diagram fa-2x mb-2"></i>
+                    <p class="mb-0">Nenhuma simulação</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveExerciseBtn">
+            <i class="fas fa-save me-1"></i>Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Upload Modal -->
+  <div class="modal fade" id="documentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-upload me-2"></i>Upload de Documentos
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="drop-zone" id="dropZone">
+            <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+            <h6>Arraste arquivos aqui ou clique para selecionar</h6>
+            <p class="text-muted">Máximo 50MB por arquivo</p>
+            <input type="file" id="fileInput" multiple class="d-none">
+          </div>
+          <div id="filePreview" class="mt-3"></div>
+          <div class="mt-3">
+            <label class="form-label">Descrição (opcional)</label>
+            <textarea class="form-control" id="fileDescription" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="uploadDocumentBtn">
+            <i class="fas fa-upload me-1"></i>Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulation Selection Modal -->
+  <div class="modal fade" id="simulationModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-link me-2"></i>Associar Simulações
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">Selecione as simulações para associar:</p>
+          <div class="simulation-selector" id="simulationSelector">
+            <div class="text-center py-4">
+              <i class="fas fa-spinner fa-spin fa-2x"></i>
+              <p>Carregando simulações...</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning" id="associateSimulationBtn">
+            <i class="fas fa-link me-1"></i>Associar Selecionadas
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-exclamation-triangle text-warning me-2"></i>Confirmar Exclusão
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Tem certeza de que deseja excluir este item?</p>
+          <small class="text-muted">Esta ação não pode ser desfeita.</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+            <i class="fas fa-trash me-1"></i>Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast" role="alert">
+      <div class="toast-header">
+        <i class="fas fa-bell text-primary me-2"></i>
+        <strong class="me-auto">Notificação</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+      </div>
+      <div class="toast-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // API Configuration
+    const API_BASE = '';
+    const ENDPOINTS = {
+      exercises: '/exercises',
+      simulations: '/simulations',
+      simulationDelete: (id) => `/simulations/${id}`,
+      exerciseDocuments: (id) => `/exercises/${id}/documents`,
+      exerciseMoveInput: (id) => `/exercises/${id}/move-input`
+    };
+
+    // Global Variables
+    let exercises = [];
+    let simulations = [];
+    let currentExerciseId = null;
+    let deleteCallback = null;
+    let currentDocuments = [];
+    let currentSimulations = [];
+    let availableSimulations = [];
+
+    // DOM Elements
+    const exerciseModal = new bootstrap.Modal(document.getElementById('exerciseModal'));
+    const documentModal = new bootstrap.Modal(document.getElementById('documentModal'));
+    const simulationModal = new bootstrap.Modal(document.getElementById('simulationModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    const toast = new bootstrap.Toast(document.getElementById('toast'));
+
+    // API Service
+    const api = {
+      async request(url, options = {}) {
+        try {
+          const response = await fetch(API_BASE + url, {
+            headers: {
+              'Content-Type': 'application/json',
+              ...options.headers
+            },
+            ...options
+          });
+
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.error || error.message || `Erro ${response.status}`);
+          }
+
+          return await response.json();
+        } catch (error) {
+          throw new Error(error.message || 'Erro de comunicação');
+        }
+      },
+
+      async uploadRequest(url, formData) {
+        try {
+          const response = await fetch(API_BASE + url, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.error || error.message || `Erro ${response.status}`);
+          }
+
+          return await response.json();
+        } catch (error) {
+          throw new Error(error.message || 'Erro de comunicação');
+        }
+      },
+
+      async getExercises() {
+        return this.request(ENDPOINTS.exercises);
+      },
+
+      async getExercise(id) {
+        return this.request(`${ENDPOINTS.exercises}/${id}`);
+      },
+
+      async createExercise(data) {
+        return this.request(ENDPOINTS.exercises, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        });
+      },
+
+      async updateExercise(id, data) {
+        return this.request(`${ENDPOINTS.exercises}/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify(data)
+        });
+      },
+
+      async deleteExercise(id) {
+        return this.request(`${ENDPOINTS.exercises}/${id}`, {
+          method: 'DELETE'
+        });
+      },
+
+      async getSimulations() {
+        return this.request(ENDPOINTS.simulations);
+      },
+
+      async uploadDocument(exerciseId, formData) {
+        return this.uploadRequest(ENDPOINTS.exerciseDocuments(exerciseId), formData);
+      },
+
+      async moveInputToSimulations(exerciseId, inputPaths) {
+        return this.request(ENDPOINTS.exerciseMoveInput(exerciseId), {
+          method: 'POST',
+          body: JSON.stringify({ inputPaths })
+        });
+      },
+
+      async deleteSimulation(simulationId) {
+        return this.request(ENDPOINTS.simulationDelete(simulationId), {
+          method: 'DELETE'
+        })
+      }
+    };
+
+    // Utility Functions
+    function showToast(message, type = 'success') {
+      const toastEl = document.getElementById('toast');
+      const toastBody = toastEl.querySelector('.toast-body');
+      
+      toastEl.className = 'toast';
+      toastEl.classList.add(`text-bg-${type}`);
+      toastBody.textContent = message;
+      
+      toast.show();
+    }
+
+    function formatDate(dateString) {
+      return dateString ? new Date(dateString).toLocaleDateString('pt-BR') : '-';
+    }
+
+    function sanitizeInput(input) {
+      return input ? input.trim() : '';
+    }
+
+    function validateDates(startDate, endDate) {
+      if (!startDate || !endDate) return true;
+      return new Date(endDate) >= new Date(startDate);
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Load Data
+    async function loadData() {
+      try {
+        updateStats(null);
+        
+        // Load exercises and simulations
+        const [exercisesData, simulationsData] = await Promise.all([
+          api.getExercises().catch(() => []),
+          api.getSimulations().catch(() => [])
+        ]);
+
+        // Handle exercises response format
+        exercises = Array.isArray(exercisesData) ? exercisesData : (exercisesData.created || []);
+        simulations = Array.isArray(simulationsData) ? simulationsData : [];
+        availableSimulations = simulations;
+
+        console.log('Dados carregados:', { exercises, simulations });
+
+        updateExerciseTable();
+        updateSimulationTable();
+        updateStats({ exercises, simulations });
+
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        showToast(`Erro ao carregar dados: ${error.message}`, 'danger');
+      }
+    }
+
+    // Update Stats
+    function updateStats(data) {
+      const totalExercisesEl = document.getElementById('totalExercises');
+      const totalSimulationsEl = document.getElementById('totalSimulations');
+      const activeExercisesEl = document.getElementById('activeExercises');
+      const totalDocumentsEl = document.getElementById('totalDocuments');
+
+      if (!data) {
+        [totalExercisesEl, totalSimulationsEl, activeExercisesEl, totalDocumentsEl]
+          .forEach(el => el.innerHTML = '<i class="fas fa-spinner fa-spin"></i>');
+        return;
+      }
+
+      const today = new Date().toISOString().split('T')[0];
+      
+      const totalExercises = data.exercises.length;
+      const totalSimulations = data.simulations.length;
+      
+      const activeExercises = data.exercises.filter(ex => {
+        if (!ex.startDate || !ex.endDate) return false;
+        const start = ex.startDate.split('T')[0];
+        const end = ex.endDate.split('T')[0];
+        return start <= today && end >= today;
+      }).length;
+      
+      const totalDocuments = data.exercises.reduce((total, ex) => 
+        total + (ex.documents ? ex.documents.length : 0), 0);
+
+      totalExercisesEl.textContent = totalExercises;
+      totalSimulationsEl.textContent = totalSimulations;
+      activeExercisesEl.textContent = activeExercises;
+      totalDocumentsEl.textContent = totalDocuments;
+    }
+
+    // Update Exercise Table
+    function updateExerciseTable() {
+      const tbody = document.getElementById('exerciseTableBody');
+      tbody.innerHTML = '';
+
+      if (exercises.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="text-center py-5">
+              <div class="empty-state">
+                <i class="fas fa-flag text-muted fa-3x mb-3"></i>
+                <h6 class="text-muted">Nenhum exercício encontrado</h6>
+                <p class="text-muted">Clique em "Criar Exercício" para começar</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      exercises.forEach(exercise => {
+        const row = document.createElement('tr');
+        
+        // Período formatado
+        const period = exercise.startDate && exercise.endDate 
+          ? `${formatDate(exercise.startDate)} até ${formatDate(exercise.endDate)}`
+          : exercise.startDate 
+            ? `A partir de ${formatDate(exercise.startDate)}`
+            : exercise.endDate 
+              ? `Até ${formatDate(exercise.endDate)}`
+              : '-';
+
+        // Status com badge colorido
+        let statusBadge = '';
+        switch (exercise.status) {
+          case 'processado':
+            statusBadge = '<span class="badge bg-success">Processado</span>';
+            break;
+          case 'criado':
+            statusBadge = '<span class="badge bg-primary">Criado</span>';
+            break;
+          case 'erro':
+            statusBadge = '<span class="badge bg-danger">Erro</span>';
+            break;
+          default:
+            statusBadge = '<span class="badge bg-secondary">Indefinido</span>';
+        }
+
+        // Contadores (usar valores diretos da API ou contar arrays)
+        const docCount = exercise.documentCount !== undefined 
+          ? exercise.documentCount 
+          : (exercise.documents ? exercise.documents.length : 0);
+          
+        const simCount = exercise.simulationCount !== undefined 
+          ? exercise.simulationCount 
+          : (exercise.simulations ? exercise.simulations.length : 0);
+
+        row.innerHTML = `
+          <td>
+            <div class="fw-bold">${exercise.name || 'Sem nome'}</div>
+            <small class="text-muted">${exercise.description || 'Sem descrição'}</small>
+          </td>
+          <td>
+            ${exercise.origin ? 
+              `<span class="badge bg-info">${exercise.origin}</span>` : 
+              '<span class="text-muted">-</span>'
+            }
+          </td>
+          <td>${exercise.trainedForce || '-'}</td>
+          <td>
+            <small class="text-muted">${period}</small>
+          </td>
+          <td>${statusBadge}</td>
+          <td>
+            <span class="badge ${docCount > 0 ? 'bg-info' : 'bg-light text-dark'}">${docCount}</span>
+          </td>
+          <td>
+            <span class="badge ${simCount > 0 ? 'bg-warning' : 'bg-light text-dark'}">${simCount}</span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-outline-primary" onclick="editExercise('${exercise.id}')" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${exercise.id}')" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    // Update Simulation Table (only unassociated ones)
+    function updateSimulationTable() {
+      const simulationsCard = document.getElementById('simulationsCard');
+      const tbody = document.getElementById('simulationTableBody');
+      
+      // Get all simulation IDs that are associated with exercises
+      const associatedSimIds = new Set();
+      exercises.forEach(exercise => {
+        if (exercise.simulations) {
+          exercise.simulations.forEach(sim => {
+            associatedSimIds.add(sim.id || sim);
+          });
+        }
+      });
+
+      // Filter unassociated simulations
+      const unassociatedSims = simulations.filter(sim => {
+        const simId = sim.data?.path || sim.id;
+        return !associatedSimIds.has(simId);
+      });
+
+      // Show/hide simulations card based on unassociated simulations
+      if (unassociatedSims.length === 0) {
+        simulationsCard.style.display = 'none';
+        return;
+      }
+
+      simulationsCard.style.display = 'block';
+      tbody.innerHTML = '';
+
+      unassociatedSims.forEach(simulation => {
+        const row = document.createElement('tr');
+        const simData = simulation.data || {};
+        const createdDate = formatDate(simData.createdAt);
+        
+        row.innerHTML = `
+          <td>
+            <span class="text-monospace">${simulation.id}</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <i class="fas fa-map-marker-alt text-muted me-2"></i>
+              ${simData.origin || '-'}
+            </div>
+          </td>
+          <td>
+            <span class="text-monospace small">${simData.path || simulation.id}</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <i class="fas fa-calendar text-muted me-2"></i>
+              ${createdDate}
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteSimulation('${simulation.id}')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    // Exercise Functions
+    async function openExerciseModal(exerciseId = null) {
+      currentExerciseId = exerciseId;
+      currentDocuments = [];
+      currentSimulations = [];
+      
+      // Reset form
+      document.getElementById('exerciseForm').reset();
+      document.getElementById('exerciseId').value = exerciseId || '';
+      
+      // Update modal title
+      const title = exerciseId ? 'Editar Exercício' : 'Criar Exercício';
+      document.querySelector('#exerciseModal .modal-title').innerHTML = 
+        `<i class="fas fa-${exerciseId ? 'edit' : 'plus'} me-2"></i>${title}`;
+
+      // If editing, load exercise data from API
+      if (exerciseId) {
+        try {
+          const exercise = await api.getExercise(exerciseId);
+          console.log('Dados do exercício carregados:', exercise);
+          
+          // Populate form with loaded data
+          document.getElementById('exerciseName').value = exercise.name || '';
+          document.getElementById('exerciseDescription').value = exercise.description || '';
+          document.getElementById('simulationType').value = exercise.simulationType || '';
+          document.getElementById('origin').value = exercise.origin || '';
+          document.getElementById('startDate').value = exercise.startDate ? exercise.startDate.split('T')[0] : '';
+          document.getElementById('endDate').value = exercise.endDate ? exercise.endDate.split('T')[0] : '';
+          document.getElementById('trainedForce').value = exercise.trainedForce || '';
+          document.getElementById('wikiUrl').value = exercise.wikiUrl || '';
+          
+          // Load documents and simulations
+          currentDocuments = exercise.documents || [];
+          currentSimulations = exercise.simulations || [];
+          
+        } catch (error) {
+          console.error('Erro ao carregar exercício:', error);
+          showToast(`Erro ao carregar exercício: ${error.message}`, 'danger');
+        }
+      }
+
+      updateDocumentsList();
+      updateSimulationsList();
+      exerciseModal.show();
+    }
+
+    function editExercise(id) {
+      openExerciseModal(id);
+    }
+
+    async function saveExercise() {
+      const name = sanitizeInput(document.getElementById('exerciseName').value);
+      const description = sanitizeInput(document.getElementById('exerciseDescription').value);
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      if (!name || !description) {
+        showToast('Nome e descrição são obrigatórios', 'warning');
+        return;
+      }
+
+      if (!validateDates(startDate, endDate)) {
+        showToast('Data de término deve ser posterior à data de início', 'warning');
+        return;
+      }
+
+      const exerciseData = {
+        name,
+        description,
+        simulationType: document.getElementById('simulationType').value,
+        origin: document.getElementById('origin').value,
+        startDate: startDate || null,
+        endDate: endDate || null,
+        trainedForce: sanitizeInput(document.getElementById('trainedForce').value),
+        wikiUrl: sanitizeInput(document.getElementById('wikiUrl').value)
+      };
+
+      try {
+        const saveBtn = document.getElementById('saveExerciseBtn');
+        saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Salvando...';
+        saveBtn.disabled = true;
+
+        let exerciseId = currentExerciseId;
+        let result;
+
+        if (currentExerciseId) {
+          result = await api.updateExercise(currentExerciseId, exerciseData);
+          console.log('Exercício atualizado:', result);
+        } else {
+          result = await api.createExercise(exerciseData);
+          exerciseId = result.id || result.exercise?.id;
+          console.log('Exercício criado:', result);
+        }
+
+        // Move simulations if any selected
+        if (currentSimulations.length > 0 && exerciseId) {
+          const inputPaths = currentSimulations.map(sim => sim.id || sim.originalPath);
+          try {
+            const moveResult = await api.moveInputToSimulations(exerciseId, inputPaths);
+            console.log('Simulações movidas:', moveResult);
+          } catch (moveError) {
+            console.error('Erro ao mover simulações:', moveError);
+            showToast(`Exercício salvo, mas erro ao associar simulações: ${moveError.message}`, 'warning');
+          }
+        }
+
+        showToast(`Exercício ${currentExerciseId ? 'atualizado' : 'criado'} com sucesso!`, 'success');
+        exerciseModal.hide();
+        await loadData(); // Reload all data to reflect changes
+
+      } catch (error) {
+        console.error('Erro ao salvar exercício:', error);
+        showToast(`Erro ao salvar: ${error.message}`, 'danger');
+      } finally {
+        const saveBtn = document.getElementById('saveExerciseBtn');
+        saveBtn.innerHTML = '<i class="fas fa-save me-1"></i>Salvar';
+        saveBtn.disabled = false;
+      }
+    }
+
+    // Document Functions
+    function openDocumentModal() {
+      if (!currentExerciseId) {
+        showToast('Salve o exercício antes de adicionar documentos', 'warning');
+        return;
+      }
+      
+      document.getElementById('fileInput').value = '';
+      document.getElementById('fileDescription').value = '';
+      document.getElementById('filePreview').innerHTML = '';
+      documentModal.show();
+    }
+
+    function updateDocumentsList() {
+      const container = document.getElementById('documentsList');
+      container.innerHTML = '';
+
+      if (currentDocuments.length === 0) {
+        container.innerHTML = `
+          <div class="text-center text-muted py-3">
+            <i class="fas fa-file-upload fa-2x mb-2"></i>
+            <p class="mb-0">Nenhum documento</p>
+          </div>
+        `;
+        return;
+      }
+
+      currentDocuments.forEach((doc, index) => {
+        const docDiv = document.createElement('div');
+        docDiv.className = 'file-item';
+        docDiv.innerHTML = `
+          <div>
+            <i class="fas fa-file-alt text-info me-2"></i>
+            <span class="fw-bold">${doc.name}</span>
+            <br>
+            <small class="text-muted">${doc.description || 'Sem descrição'}</small>
+          </div>
+          <button class="btn btn-sm btn-outline-danger disabled" onclick="removeDocument(${index})">
+            <i class="fas fa-trash"></i>
+          </button>
+        `;
+        container.appendChild(docDiv);
+      });
+    }
+
+    function removeDocument(index) {
+      currentDocuments.splice(index, 1);
+      updateDocumentsList();
+    }
+
+    function setupFileUpload() {
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      const filePreview = document.getElementById('filePreview');
+
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        fileInput.files = e.dataTransfer.files;
+        updateFilePreview();
+      });
+
+      fileInput.addEventListener('change', updateFilePreview);
+    }
+
+    function updateFilePreview() {
+      const fileInput = document.getElementById('fileInput');
+      const filePreview = document.getElementById('filePreview');
+      
+      filePreview.innerHTML = '';
+
+      if (fileInput.files.length === 0) return;
+
+      Array.from(fileInput.files).forEach(file => {
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'file-item';
+        fileDiv.innerHTML = `
+          <div>
+            <i class="fas fa-file text-primary me-2"></i>
+            <span>${file.name}</span>
+            <br>
+            <small class="text-muted">${formatFileSize(file.size)}</small>
+          </div>
+        `;
+        filePreview.appendChild(fileDiv);
+      });
+    }
+
+    async function uploadDocuments() {
+      const fileInput = document.getElementById('fileInput');
+      const description = document.getElementById('fileDescription').value;
+
+      if (fileInput.files.length === 0) {
+        showToast('Selecione pelo menos um arquivo', 'warning');
+        return;
+      }
+
+      if (!currentExerciseId) {
+        showToast('Salve o exercício antes de fazer upload', 'warning');
+        return;
+      }
+
+      try {
+        const uploadBtn = document.getElementById('uploadDocumentBtn');
+        uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Enviando...';
+        uploadBtn.disabled = true;
+
+        for (const file of fileInput.files) {
+          const formData = new FormData();
+          formData.append('file', file);
+          if (description) {
+            formData.append('description', description);
+          }
+
+          const result = await api.uploadDocument(currentExerciseId, formData);
+          
+          currentDocuments.push({
+            id: result.document?.id || Date.now(),
+            name: result.document?.name || file.name,
+            description: result.document?.description || description,
+            size: result.document?.size || file.size,
+            uploadedAt: result.document?.uploadedAt || new Date().toISOString()
+          });
+        }
+
+        updateDocumentsList();
+        documentModal.hide();
+        showToast('Documentos enviados com sucesso!', 'success');
+
+      } catch (error) {
+        showToast(`Erro ao enviar documentos: ${error.message}`, 'danger');
+      } finally {
+        const uploadBtn = document.getElementById('uploadDocumentBtn');
+        uploadBtn.innerHTML = '<i class="fas fa-upload me-1"></i>Enviar';
+        uploadBtn.disabled = false;
+      }
+    }
+
+    // Simulation Functions
+    async function openSimulationModal() {
+      const simulationSelector = document.getElementById('simulationSelector');
+      simulationSelector.innerHTML = `
+        <div class="text-center py-4">
+          <i class="fas fa-spinner fa-spin fa-2x"></i>
+          <p>Carregando simulações...</p>
+        </div>
+      `;
+
+      simulationModal.show();
+
+      try {
+        await loadData(); // Refresh simulations
+        renderSimulationSelector();
+      } catch (error) {
+        simulationSelector.innerHTML = `
+          <div class="text-center py-4 text-danger">
+            <i class="fas fa-exclamation-triangle fa-2x"></i>
+            <p>Erro ao carregar simulações</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderSimulationSelector() {
+      const simulationSelector = document.getElementById('simulationSelector');
+      simulationSelector.innerHTML = '';
+
+      if (availableSimulations.length === 0) {
+        simulationSelector.innerHTML = `
+          <div class="text-center py-4 text-muted">
+            <i class="fas fa-sitemap fa-2x mb-2"></i>
+            <p>Nenhuma simulação disponível</p>
+          </div>
+        `;
+        return;
+      }
+
+      availableSimulations.forEach(simulation => {
+        const simDiv = document.createElement('div');
+        simDiv.className = 'simulation-option';
+        
+        const simulationId = simulation.data?.path || simulation.id;
+        const isSelected = currentSimulations.some(s => s.id === simulationId);
+        
+        simDiv.innerHTML = `
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="${simulationId}" 
+                   id="sim_${simulation.id}" ${isSelected ? 'checked' : ''}>
+            <label class="form-check-label" for="sim_${simulation.id}">
+              <strong>${simulation.id}</strong>
+              <br>
+              <small class="text-muted">Origem: ${simulation.data?.origin || 'N/A'}</small>
+              <br>
+              <small class="text-muted">Path: ${simulationId}</small>
+            </label>
+          </div>
+        `;
+        
+        simulationSelector.appendChild(simDiv);
+      });
+    }
+
+    function associateSelectedSimulations() {
+      const selectedCheckboxes = document.querySelectorAll('#simulationSelector input[type="checkbox"]:checked');
+      
+      currentSimulations = Array.from(selectedCheckboxes).map(checkbox => {
+        const simulation = availableSimulations.find(s => 
+          (s.data?.path || s.id) === checkbox.value
+        );
+        
+        return {
+          id: checkbox.value,
+          name: simulation?.id || checkbox.value,
+          originalPath: checkbox.value
+        };
+      });
+
+      updateSimulationsList();
+      simulationModal.hide();
+      showToast('Simulações associadas com sucesso!', 'success');
+    }
+
+    function updateSimulationsList() {
+      const container = document.getElementById('simulationsList');
+      container.innerHTML = '';
+
+      if (currentSimulations.length === 0) {
+        container.innerHTML = `
+          <div class="text-center text-muted py-3">
+            <i class="fas fa-project-diagram fa-2x mb-2"></i>
+            <p class="mb-0">Nenhuma simulação</p>
+          </div>
+        `;
+        return;
+      }
+
+      currentSimulations.forEach((sim, index) => {
+        const simDiv = document.createElement('div');
+        simDiv.className = 'simulation-item';
+        simDiv.innerHTML = `
+          <div>
+            <i class="fas fa-sitemap text-warning me-2"></i>
+            <span class="fw-bold">${sim.name}</span>
+            <br>
+            <small class="text-muted">${sim.originalPath || sim.id}</small>
+          </div>
+          <button class="btn btn-sm btn-outline-danger disabled" onclick="removeSimulation(${index})">
+            <i class="fas fa-unlink"></i>
+          </button>
+        `;
+        container.appendChild(simDiv);
+      });
+    }
+
+    function removeSimulation(index) {
+      currentSimulations.splice(index, 1);
+      updateSimulationsList();
+    }
+
+    async function deleteSimulation(simulationId) {
+      try {
+        await api.deleteSimulation(simulationId);
+        showToast('Simulação excluída com sucesso!', 'success');
+        await loadData();
+      } catch (error) {
+        showToast(`Erro ao excluir simulação: ${error.message}`, 'danger');
+      }
+    }
+
+    // Delete Functions
+    function confirmDelete(exerciseId) {
+      deleteCallback = () => deleteExercise(exerciseId);
+      deleteModal.show();
+    }
+
+    async function deleteExercise(exerciseId) {
+      try {
+        await api.deleteExercise(exerciseId);
+        showToast('Exercício excluído com sucesso!', 'success');
+        await loadData();
+      } catch (error) {
+        showToast(`Erro ao excluir: ${error.message}`, 'danger');
+      }
+    }
+
+    // Search Functionality
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        
+        if (!term.trim()) {
+          updateExerciseTable();
+          return;
+        }
+
+        const filtered = exercises.filter(exercise => 
+          exercise.name?.toLowerCase().includes(term) ||
+          exercise.description?.toLowerCase().includes(term) ||
+          exercise.trainedForce?.toLowerCase().includes(term) ||
+          exercise.origin?.toLowerCase().includes(term)
+        );
+
+        const tbody = document.getElementById('exerciseTableBody');
+        tbody.innerHTML = '';
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="8" class="text-center py-5">
+                <i class="fas fa-search text-muted fa-2x mb-2"></i>
+                <p class="text-muted">Nenhum resultado encontrado para "${term}"</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        filtered.forEach(exercise => {
+          const row = document.createElement('tr');
+          const period = exercise.startDate && exercise.endDate 
+            ? `${formatDate(exercise.startDate)} até ${formatDate(exercise.endDate)}`
+            : exercise.startDate 
+              ? `A partir de ${formatDate(exercise.startDate)}`
+              : exercise.endDate 
+                ? `Até ${formatDate(exercise.endDate)}`
+                : '-';
+
+          // Status badge
+          let statusBadge = '';
+          switch (exercise.status) {
+            case 'processado':
+              statusBadge = '<span class="badge bg-success">Processado</span>';
+              break;
+            case 'criado':
+              statusBadge = '<span class="badge bg-primary">Criado</span>';
+              break;
+            case 'erro':
+              statusBadge = '<span class="badge bg-danger">Erro</span>';
+              break;
+            default:
+              statusBadge = '<span class="badge bg-secondary">Indefinido</span>';
+          }
+
+          const docCount = exercise.documentCount !== undefined 
+            ? exercise.documentCount 
+            : (exercise.documents ? exercise.documents.length : 0);
+            
+          const simCount = exercise.simulationCount !== undefined 
+            ? exercise.simulationCount 
+            : (exercise.simulations ? exercise.simulations.length : 0);
+
+          row.innerHTML = `
+            <td>
+              <div class="fw-bold">${exercise.name || 'Sem nome'}</div>
+              <small class="text-muted">${exercise.description || 'Sem descrição'}</small>
+            </td>
+            <td>
+              ${exercise.origin ? 
+                `<span class="badge bg-info">${exercise.origin}</span>` : 
+                '<span class="text-muted">-</span>'
+              }
+            </td>
+            <td>${exercise.trainedForce || '-'}</td>
+            <td>
+              <small class="text-muted">${period}</small>
+            </td>
+            <td>${statusBadge}</td>
+            <td>
+              <span class="badge ${docCount > 0 ? 'bg-info' : 'bg-light text-dark'}">${docCount}</span>
+            </td>
+            <td>
+              <span class="badge ${simCount > 0 ? 'bg-warning' : 'bg-light text-dark'}">${simCount}</span>
+            </td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-primary" onclick="editExercise('${exercise.id}')">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete('${exercise.id}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          `;
+          
+          tbody.appendChild(row);
+        });
+      });
+    }
+
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load initial data
+      loadData();
+      
+      // Setup components
+      setupSearch();
+      setupFileUpload();
+
+      // Button event listeners
+      document.getElementById('createExerciseBtn').addEventListener('click', () => {
+        openExerciseModal();
+      });
+
+      document.getElementById('saveExerciseBtn').addEventListener('click', saveExercise);
+
+      document.getElementById('addDocumentBtn').addEventListener('click', openDocumentModal);
+      
+      document.getElementById('uploadDocumentBtn').addEventListener('click', uploadDocuments);
+
+      document.getElementById('addSimulationBtn').addEventListener('click', openSimulationModal);
+      
+      document.getElementById('associateSimulationBtn').addEventListener('click', associateSelectedSimulations);
+
+      document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+        if (deleteCallback) {
+          deleteCallback();
+          deleteModal.hide();
+          deleteCallback = null;
+        }
+      });
+
+      // Form submission
+      document.getElementById('exerciseForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveExercise();
+      });
+    });
+
+    // Expose functions globally for onclick handlers
+    window.editExercise = editExercise;
+    window.confirmDelete = confirmDelete;
+    window.removeDocument = removeDocument;
+    window.removeSimulation = removeSimulation;
+    window.deleteSimulation = deleteSimulation;
+  </script>
+</body>
+</html>

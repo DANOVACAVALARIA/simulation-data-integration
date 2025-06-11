@@ -1,0 +1,6 @@
+apache-airflow-providers-apache-spark
+apache-airflow-providers-amazon
+pyspark
+pyiceberg
+pandas
+pyarrow

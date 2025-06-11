@@ -1,0 +1,12 @@
+services:
+  portal-site:
+    container_name: portal-app
+    build:
+      context: .
+      dockerfile: Dockerfile.portal
+    mem_limit: 0.5g
+    cpus: '0.5'
+    networks:
+      - ebsim-net
+    depends_on:
+      - nginx

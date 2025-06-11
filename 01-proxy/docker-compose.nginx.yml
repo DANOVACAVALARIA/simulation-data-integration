@@ -1,0 +1,13 @@
+services:
+  nginx:
+    image: nginx:1.28-alpine
+    container_name: nginx-proxy
+    restart: unless-stopped 
+    mem_limit: 0.5g
+    cpus: '1.0'
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx_conf:/etc/nginx/conf.d:ro
+    networks:
+      - ebsim-net

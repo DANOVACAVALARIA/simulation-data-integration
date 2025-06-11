@@ -1,0 +1,24 @@
+services:
+  nessie:
+    image: projectnessie/nessie:0.76.6
+    container_name: nessie-app 
+    networks:
+      - ebsim-net   
+  
+  dremio:
+    platform: linux/x86_64
+    image: dremio/dremio-oss:25.2
+    container_name: dremio-app
+    env_file:
+      - ./env/dremio.env
+    networks:
+      - ebsim-net
+    volumes:
+      - data:/opt/dremio/data
+      - lib:/var/lib/dremio
+      - local:/localFiles
+
+volumes:
+  data:
+  lib:
+  local:

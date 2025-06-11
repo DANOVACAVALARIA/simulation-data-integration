@@ -1,0 +1,11 @@
+FROM node:23-alpine
+
+WORKDIR /app
+
+COPY ./src .
+
+RUN npm install
+
+EXPOSE 5502
+
+CMD ["npm", "run", "exercises"]

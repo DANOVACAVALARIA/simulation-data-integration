@@ -1,0 +1,17 @@
+{
+  "name": "exercise-manager",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "exercises": "node server.js"
+  },
+  "author": "JNDN",
+  "license": "MIT",
+  "description": "Upload and coordinate data to minIO",
+  "dependencies": {
+    "express": "^5.1.0",
+    "minio": "^8.0.5",
+    "multer": "^2.0.0"
+  }
+}

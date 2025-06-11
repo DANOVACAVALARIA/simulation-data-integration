@@ -1,0 +1,13 @@
+services:
+  wikijs:
+    image: ghcr.io/requarks/wiki:2.5
+    container_name: wikijs-app
+    env_file:
+      - ./env/wikijs.env
+    mem_limit: 0.5g
+    cpus: '1.0'
+    networks:
+      - ebsim-net
+    depends_on:
+      - postgres
+    restart: unless-stopped

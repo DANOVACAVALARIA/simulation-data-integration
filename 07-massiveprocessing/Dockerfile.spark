@@ -1,0 +1,15 @@
+FROM bitnami/spark:3.5.5
+
+USER root
+
+RUN apt-get update && apt-get install -y wget && apt-get clean
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+COPY ./open-dis-python /tmp/open-dis-python
+
+WORKDIR /tmp/open-dis-python
+RUN pip install --no-cache-dir .

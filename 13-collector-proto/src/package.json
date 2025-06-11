@@ -1,0 +1,16 @@
+{
+  "name": "collector-proto",
+  "version": "1.2.3",
+  "main": "collector-proto.js",
+  "type": "module",
+  "scripts": {
+    "collector-proto": "node collector-proto.js"
+  },
+  "author": "JNDN",
+  "license": "MIT",
+  "description": "Data recorder for Protobuf messages",
+  "dependencies": {
+    "minio": "^8.0.5",
+    "ws": "^8.18.2"
+  }
+}

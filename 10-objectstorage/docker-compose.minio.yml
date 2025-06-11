@@ -1,0 +1,14 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio-storage
+    env_file:
+      - ./env/minio.env
+    networks:
+      - ebsim-net
+    volumes:
+      - minio_data:/data
+    command: ["server", "/data", "--console-address", ":9001"]
+
+volumes:
+  minio_data:

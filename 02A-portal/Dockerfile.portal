@@ -1,0 +1,9 @@
+FROM node:23-alpine
+
+WORKDIR /app
+
+COPY ./src .
+
+EXPOSE 5500
+
+CMD ["node", "server.js"]

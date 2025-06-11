@@ -1,0 +1,20 @@
+{
+  "name": "message-generators",
+  "version": "1.0.0",
+  "main": "orchestrator.js",
+  "type": "module",
+  "scripts": {
+    "orchestrator": "node orchestrator.js",
+    "generator-proto": "node ./generator-proto/generator-proto.js"
+  },
+  "author": "JNDN",
+  "license": "MIT",
+  "description": "DIS and MASA Sword messages generators",
+  "dependencies": {
+    "open-dis": "^1.3.6",
+    "perf_hooks": "^0.0.1",
+    "protobufjs": "^7.5.3",
+    "seedrandom": "^3.0.5",
+    "ws": "^8.18.2"
+  }
+}

@@ -1,0 +1,16 @@
+include:
+  - path: './01-proxy/docker-compose.nginx.yml'
+  - path: './02A-portal/docker-compose.portal.yml'
+  - path: './02B-wiki/docker-compose.wikijs.yml'
+  - path: './02C-exercises/docker-compose.exercises.yml'
+  # - path: './03-authenticator/docker-compose.keycloak.yml'
+  - path: './06-orchestrator/docker-compose.airflow.yml'
+  - path: './07-massiveprocessing/docker-compose.spark.yml'
+  - path: './08-queryengine/docker-compose.dremio.yml'
+  - path: './09-database/docker-compose.postgres.yml'
+  - path: './10-objectstorage/docker-compose.minio.yml'
+  # - path: './12-collector-dis/docker-compose.collector-dis.yml'
+  # - path: './13-collector-proto/docker-compose.collector-proto.yml'
+
+networks:
+  ebsim-net:

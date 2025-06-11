@@ -1,0 +1,15 @@
+services:
+  exercises-app:
+    container_name: exercises-app
+    env_file:
+      - ./env/exercises.env
+    build:
+      context: .
+      dockerfile: Dockerfile.exercises
+    mem_limit: 0.5g
+    cpus: '0.5'
+    networks:
+      - ebsim-net
+    depends_on:
+      - nginx
+      - minio
