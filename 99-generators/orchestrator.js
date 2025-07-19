@@ -2,7 +2,7 @@ import { spawn } from 'child_process'
 import fs from 'fs/promises'
 
 // configs
-const MODE = 'DIS'    // 'DIS' ou 'PROTO'
+const MODE = 'PROTO'    // 'DIS' ou 'PROTO'
 
 const TOTAL_OF_EXPERIMENTS = 5
 const DELAY_BETWEEN_EXPERIMENTS_MS = 3000

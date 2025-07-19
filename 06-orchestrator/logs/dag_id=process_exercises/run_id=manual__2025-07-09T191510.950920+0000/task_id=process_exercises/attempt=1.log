@@ -1,0 +1,95 @@
+[2025-07-09T19:15:15.250+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-09T19:15:15.286+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: process_exercises.process_exercises manual__2025-07-09T19:15:10.950920+00:00 [queued]>
+[2025-07-09T19:15:15.297+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: process_exercises.process_exercises manual__2025-07-09T19:15:10.950920+00:00 [queued]>
+[2025-07-09T19:15:15.298+0000] {taskinstance.py:2884} INFO - Starting attempt 1 of 1
+[2025-07-09T19:15:15.343+0000] {taskinstance.py:2907} INFO - Executing <Task(SparkSubmitOperator): process_exercises> on 2025-07-09 19:15:10.950920+00:00
+[2025-07-09T19:15:15.350+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=5693) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-09T19:15:15.351+0000] {standard_task_runner.py:72} INFO - Started process 5694 to run task
+[2025-07-09T19:15:15.350+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'process_exercises', 'process_exercises', 'manual__2025-07-09T19:15:10.950920+00:00', '--job-id', '252', '--raw', '--subdir', 'DAGS_FOLDER/process_exercises.py', '--cfg-path', '/tmp/tmpaeuu7jbn']
+[2025-07-09T19:15:15.352+0000] {standard_task_runner.py:105} INFO - Job 252: Subtask process_exercises
+[2025-07-09T19:15:15.454+0000] {task_command.py:467} INFO - Running <TaskInstance: process_exercises.process_exercises manual__2025-07-09T19:15:10.950920+00:00 [running]> on host 38b7408c68d7
+[2025-07-09T19:15:15.668+0000] {taskinstance.py:3157} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='process_exercises' AIRFLOW_CTX_TASK_ID='process_exercises' AIRFLOW_CTX_EXECUTION_DATE='2025-07-09T19:15:10.950920+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-09T19:15:10.950920+00:00'
+[2025-07-09T19:15:15.669+0000] {taskinstance.py:740} INFO - ::endgroup::
+[2025-07-09T19:15:15.703+0000] {base.py:84} INFO - Retrieving connection 'spark-ebsim'
+[2025-07-09T19:15:15.711+0000] {spark_submit.py:474} INFO - Spark-Submit cmd: spark-submit --master spark://spark-master:7077 --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar,/opt/bitnami/spark/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar,/opt/bitnami/spark/jars/nessie-client-0.103.2.jar,/opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar,/opt/bitnami/spark/jars/aws-java-sdk-bundle-1.12.262.jar, --name arrow-spark --deploy-mode client /opt/bitnami/spark/jobs/process_exercises_job.py {"id": "CA-SUL-virtual-12345-2025-07-09", "manifest_entry": {"data": {"createdAt": "2025-07-09T19:11:22.499Z", "origin": "CA-SUL", "path": "exercises/CA-SUL-virtual-12345-2025-07-09"}, "id": "CA-SUL-virtual-12345-2025-07-09"}, "metadata": {"createdAt": "2025-07-09T19:11:22.499Z", "description": "12345", "documents": [{"description": "", "id": "1752088298151", "mimetype": "application/pdf", "name": "Op Jacui IV - Anexo A - Inteligencia.pdf", "path": "exercises/CA-SUL-virtual-12345-2025-07-09/documents/Op Jacui IV - Anexo A - Inteligencia.pdf", "size": 47523, "uploadedAt": "2025-07-09T19:11:38.151Z"}], "endDate": "2025-07-10", "id": "CA-SUL-virtual-12345-2025-07-09", "name": "Exerc\u00edcio Virtual", "origin": "CA-SUL", "simulationType": "virtual", "simulations": [{"id": "172.19.0.6_2025-07-09", "movedAt": "2025-07-09T19:11:46.029Z", "name": "172.19.0.6_2025-07-09", "originalPath": "staging/172.19.0.6_2025-07-09", "path": "exercises/CA-SUL-virtual-12345-2025-07-09/simulations/172.19.0.6_2025-07-09"}], "startDate": "2025-07-09", "trainedForce": "12345v", "updatedAt": "2025-07-09T19:11:46.029Z", "wikiUrl": ""}}
+[2025-07-09T19:15:17.554+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:17 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-07-09T19:15:19.464+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Iniciando processamento otimizado de exercícios
+[2025-07-09T19:15:19.465+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Exercício selecionado: CA-SUL-virtual-12345-2025-07-09
+[2025-07-09T19:15:19.465+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Criando sessão Spark otimizada
+[2025-07-09T19:15:20.049+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Running Spark version 3.5.5
+[2025-07-09T19:15:20.050+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: OS info Linux, 5.15.167.4-microsoft-standard-WSL2, amd64
+[2025-07-09T19:15:20.051+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Java version 17.0.15
+[2025-07-09T19:15:20.081+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceUtils: ==============================================================
+[2025-07-09T19:15:20.081+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2025-07-09T19:15:20.082+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceUtils: ==============================================================
+[2025-07-09T19:15:20.082+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Submitted application: ProcessExercisesOptimized
+[2025-07-09T19:15:20.101+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 2048, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2025-07-09T19:15:20.108+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceProfile: Limiting resource is cpu
+[2025-07-09T19:15:20.109+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2025-07-09T19:15:20.152+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SecurityManager: Changing view acls to: airflow
+[2025-07-09T19:15:20.153+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SecurityManager: Changing modify acls to: airflow
+[2025-07-09T19:15:20.154+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SecurityManager: Changing view acls groups to:
+[2025-07-09T19:15:20.155+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SecurityManager: Changing modify acls groups to:
+[2025-07-09T19:15:20.156+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: airflow; groups with view permissions: EMPTY; users with modify permissions: airflow; groups with modify permissions: EMPTY
+[2025-07-09T19:15:20.347+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO Utils: Successfully started service 'sparkDriver' on port 40583.
+[2025-07-09T19:15:20.371+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkEnv: Registering MapOutputTracker
+[2025-07-09T19:15:20.410+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkEnv: Registering BlockManagerMaster
+[2025-07-09T19:15:20.425+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2025-07-09T19:15:20.426+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2025-07-09T19:15:20.430+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2025-07-09T19:15:20.448+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-a134b5ba-3266-45af-8765-d3cc63f1a27b
+[2025-07-09T19:15:20.460+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2025-07-09T19:15:20.472+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkEnv: Registering OutputCommitCoordinator
+[2025-07-09T19:15:20.673+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2025-07-09T19:15:20.725+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[2025-07-09T19:15:20.772+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar at spark://38b7408c68d7:40583/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar with timestamp 1752088520043
+[2025-07-09T19:15:20.774+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar at spark://38b7408c68d7:40583/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar with timestamp 1752088520043
+[2025-07-09T19:15:20.775+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/nessie-client-0.103.2.jar at spark://38b7408c68d7:40583/jars/nessie-client-0.103.2.jar with timestamp 1752088520043
+[2025-07-09T19:15:20.776+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar at spark://38b7408c68d7:40583/jars/hadoop-aws-3.3.2.jar with timestamp 1752088520043
+[2025-07-09T19:15:20.778+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://38b7408c68d7:40583/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1752088520043
+[2025-07-09T19:15:20.878+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+[2025-07-09T19:15:20.959+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:20 INFO TransportClientFactory: Successfully created connection to spark-master/172.19.0.5:7077 after 62 ms (0 ms spent in bootstraps)
+[2025-07-09T19:15:21.051+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20250709191521-0015
+[2025-07-09T19:15:21.053+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20250709191521-0015/0 on worker-20250709171731-172.19.0.7-37405 (172.19.0.7:37405) with 2 core(s)
+[2025-07-09T19:15:21.055+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO StandaloneSchedulerBackend: Granted executor ID app-20250709191521-0015/0 on hostPort 172.19.0.7:37405 with 2 core(s), 2.0 GiB RAM
+[2025-07-09T19:15:21.060+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44067.
+[2025-07-09T19:15:21.061+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO NettyBlockTransferService: Server created on 38b7408c68d7:44067
+[2025-07-09T19:15:21.062+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2025-07-09T19:15:21.067+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 38b7408c68d7, 44067, None)
+[2025-07-09T19:15:21.070+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO BlockManagerMasterEndpoint: Registering block manager 38b7408c68d7:44067 with 434.4 MiB RAM, BlockManagerId(driver, 38b7408c68d7, 44067, None)
+[2025-07-09T19:15:21.072+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 38b7408c68d7, 44067, None)
+[2025-07-09T19:15:21.073+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 38b7408c68d7, 44067, None)
+[2025-07-09T19:15:21.202+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20250709191521-0015/0 is now RUNNING
+[2025-07-09T19:15:21.265+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:21 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2025-07-09T19:15:21.482+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Sessão Spark otimizada criada com sucesso
+[2025-07-09T19:15:22.115+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Processador de exercícios inicializado com otimizações
+[2025-07-09T19:15:22.115+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Criando namespace nessie.exercises
+[2025-07-09T19:15:27.017+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Namespace criado/verificado com sucesso
+[2025-07-09T19:15:27.017+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 === FASE 1: PROCESSAMENTO DE DOCUMENTOS ===
+[2025-07-09T19:15:27.018+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Iniciando processamento de documentos PDF
+[2025-07-09T19:15:27.019+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Processando 1 arquivos PDF
+[2025-07-09T19:15:27.019+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Processando lote 1: 1 arquivos
+[2025-07-09T19:15:27.307+0000] {spark_submit.py:644} INFO - 25/07/09 19:15:27 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+[2025-07-09T19:15:38.916+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Lote processado: 1 registros
+[2025-07-09T19:15:46.829+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Total de PDFs processados: 1 registros
+[2025-07-09T19:15:47.217+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Salvando 1 registros na tabela nessie.exercises.pdf_documents
+[2025-07-09T19:15:48.459+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Salvando tabela nessie.exercises.pdf_documents em modo append (1 partições)
+[2025-07-09T19:15:53.557+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Tabela nessie.exercises.pdf_documents salva com sucesso (1 registros)
+[2025-07-09T19:15:53.558+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 === FASE 2: PROCESSAMENTO DE SIMULAÇÕES ===
+[2025-07-09T19:15:53.559+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Iniciando processamento de simulações
+[2025-07-09T19:15:53.559+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Buscando arquivos em: s3a://bronze/exercises/CA-SUL-virtual-12345-2025-07-09/simulations/172.19.0.6_2025-07-09/
+[2025-07-09T19:15:53.910+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Encontrados 1 arquivos DIS (.bin)
+[2025-07-09T19:15:53.910+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Processando 1 arquivos DIS
+[2025-07-09T19:15:56.884+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Arquivos DIS processados: 1 arquivos (400 registros)
+[2025-07-09T19:15:56.885+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Tipo de mensagem de simulação: DIS
+[2025-07-09T19:15:57.546+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ℹ️ Salvando 400 registros na tabela nessie.exercises.dis_messages
+[2025-07-09T19:15:57.668+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Salvando tabela nessie.exercises.dis_messages em modo append (1 partições)
+[2025-07-09T19:15:59.461+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Tabela nessie.exercises.dis_messages salva com sucesso (400 registros)
+[2025-07-09T19:15:59.461+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Simulações processadas e salvas com sucesso
+[2025-07-09T19:15:59.462+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ ✨ Processamento otimizado concluído com sucesso!
+[2025-07-09T19:15:59.463+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] 🔄 Finalizando sessão Spark
+[2025-07-09T19:15:59.555+0000] {spark_submit.py:644} INFO - [PROCESS EXERCISES] ✅ Sessão Spark finalizada com sucesso
+[2025-07-09T19:16:00.040+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2025-07-09T19:16:00.041+0000] {taskinstance.py:361} INFO - Marking task as SUCCESS. dag_id=process_exercises, task_id=process_exercises, run_id=manual__2025-07-09T19:15:10.950920+00:00, execution_date=20250709T191510, start_date=20250709T191515, end_date=20250709T191600
+[2025-07-09T19:16:00.153+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-07-09T19:16:00.169+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -7,7 +7,7 @@ export const generatorProtoConfig = async () => {
     intervalBetweenProtoMsgInMs: 1000,
     terminationCheckIntervalMs: 2000,
     applicationSavingIntervalMs: 30000,
-    metricsDir: '../15-metrics/generator-proto',
+    metricsDir: '../14-metrics/generator-proto',
     seed: 123
   }
 

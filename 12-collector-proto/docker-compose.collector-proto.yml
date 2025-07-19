@@ -1,0 +1,16 @@
+services:
+  collector-proto:
+    container_name: collector-proto
+    env_file:
+      - ./env/collector-proto.env
+    volumes:
+      - ../14-metrics/collector-proto:/app/metrics
+    build:
+      context: .
+      dockerfile: Dockerfile.collector-proto
+    mem_limit: 0.5g
+    cpus: '0.5'
+    networks:
+      - ebsim-net
+    depends_on:
+      - minio

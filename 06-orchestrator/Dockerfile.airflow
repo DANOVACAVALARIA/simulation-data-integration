@@ -1,31 +1,25 @@
-# Base image
-FROM apache/airflow:2.9.3
+# base image
+FROM apache/airflow:2.11.0
 
-# Instalação do Java, wget e pacotes necessários
+# instalação do Java, wget e pacotes necessários
 USER root
 RUN apt-get update && \
     apt-get install -y --no-install-recommends openjdk-17-jdk wget procps && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Definir JAVA_HOME
+# definir JAVA_HOME
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
-# Retorna ao usuário padrão
+# retorna ao usuário padrão
 USER airflow
 
-# Atualizar pip e instalar dependências
+# atualizar pip e instalar dependências
 RUN pip install --no-cache-dir --upgrade pip
 
-# Copiar a biblioteca personalizada
-COPY --chown=airflow:airflow ./open-dis-python /tmp/open-dis-python
-
-# Instalar a biblioteca personalizada
-WORKDIR /tmp/open-dis-python
-RUN pip install --no-cache-dir .
-
-# Instalar pacotes adicionais necessários
+# instalar pacotes adicionais necessários
 COPY requirements.txt /tmp/requirements.txt
+
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Voltar ao diretório padrão do Airflow
+# diretório padrão do Airflow
 WORKDIR /opt/airflow

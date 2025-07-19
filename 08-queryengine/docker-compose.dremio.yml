@@ -1,9 +1,17 @@
 services:
   nessie:
-    image: projectnessie/nessie:0.76.6
+    image: ghcr.io/projectnessie/nessie:0.99.0
     container_name: nessie-app 
+    env_file:
+      - ./env/nessie.env
+    mem_limit: 0.5g
+    cpus: '1.0'
     networks:
-      - ebsim-net   
+      - ebsim-net
+    depends_on:
+      - postgres
+    restart: always
+
   
   dremio:
     platform: linux/x86_64
@@ -11,14 +19,13 @@ services:
     container_name: dremio-app
     env_file:
       - ./env/dremio.env
+    mem_limit: 4g
+    cpus: '2.0'
     networks:
       - ebsim-net
     volumes:
-      - data:/opt/dremio/data
-      - lib:/var/lib/dremio
-      - local:/localFiles
+      - dremio-data:/opt/dremio/data
 
 volumes:
-  data:
-  lib:
-  local:
+  nessie-data:
+  dremio-data:

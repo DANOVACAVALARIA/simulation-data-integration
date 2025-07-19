@@ -1,0 +1,20 @@
+services:
+  superset:
+    build:
+      dockerfile: Dockerfile.superset
+    container_name: superset-app
+    env_file:
+      - ./env/superset.env
+    depends_on:
+      - postgres
+    networks:      
+      - ebsim-net
+    volumes:
+      - ./superset_home:/app/pythonpath
+      - superset_data:/app/superset_home
+    mem_limit: 2g
+    cpus: '1.0'
+
+volumes:
+  superset_home:
+  superset_data:

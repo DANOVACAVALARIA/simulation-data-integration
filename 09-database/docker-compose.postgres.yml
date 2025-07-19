@@ -7,6 +7,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db-init:/docker-entrypoint-initdb.d
+    mem_limit: 0.5g
+    cpus: '1.0'
     networks:
       - ebsim-net
     restart: always

@@ -1,0 +1,14 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.0
+    container_name: keycloak-app
+    env_file:
+      - ./env/keycloak.env
+    command: start-dev
+    mem_limit: 0.5g
+    cpus: '0.5'
+    networks:
+      - ebsim-net
+    depends_on:
+      - postgres
+    restart: always

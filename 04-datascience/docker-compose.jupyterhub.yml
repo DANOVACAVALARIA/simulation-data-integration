@@ -1,0 +1,18 @@
+services:
+  jupyterhub:
+    build:
+      dockerfile: Dockerfile.jupyterhub
+    container_name: jupyterhub-app
+    env_file:
+      - ./env/jupyterhub.env
+    restart: always
+    volumes:
+      - ./jupyterhub_data:/srv/jupyterhub
+      - /var/run/docker.sock:/var/run/docker.sock
+    mem_limit: 1g
+    cpus: '1.0'
+    networks:
+      - ebsim-net
+
+volumes:
+  jupyterhub_data:

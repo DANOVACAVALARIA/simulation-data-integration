@@ -1,0 +1,16 @@
+services:
+  collector-dis:
+    container_name: collector-dis
+    env_file:
+      - ./env/collector-dis.env
+    volumes:
+      - ../14-metrics/collector-dis:/app/metrics
+    build:
+      context: .
+      dockerfile: Dockerfile.collector-dis
+    mem_limit: 0.5g
+    cpus: '0.5'
+    networks:
+      - ebsim-net
+    depends_on:
+      - minio

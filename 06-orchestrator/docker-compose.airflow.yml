@@ -8,9 +8,9 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ../14-include/jobs:/opt/bitnami/spark/jobs
-    - ../14-include/jars:/opt/bitnami/spark/jars
-  mem_limit: 4g
+    - ../13-include/jobs:/opt/bitnami/spark/jobs
+    - ../13-include/jars:/opt/bitnami/spark/jars
+  mem_limit: 2g
   cpus: '2.0'
   networks:
     - ebsim-net
@@ -19,7 +19,7 @@ services:
   airflow-webserver:
     <<: *airflow-common
     depends_on:
-      - postgres
+      - airflow-init
     container_name: airflow-webserver
     command: webserver
     healthcheck:
@@ -31,7 +31,6 @@ services:
     <<: *airflow-common
     depends_on:
       - airflow-webserver
-      - postgres
     container_name: airflow-scheduler
     command: scheduler
 

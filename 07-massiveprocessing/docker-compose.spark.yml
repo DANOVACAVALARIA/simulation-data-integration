@@ -3,7 +3,7 @@ x-spark-common:
   build:
     dockerfile: Dockerfile.spark
   volumes:
-    - ../14-include/jobs:/opt/bitnami/spark/jobs
+    - ../13-include/jobs:/opt/bitnami/spark/jobs
     # - ../14-include/jars:/opt/bitnami/spark/jars
   mem_limit: 4g
   cpus: '2.0'
@@ -21,9 +21,9 @@ services:
     <<: *spark-common
     env_file:
       - ./env/spark-worker.env      
-    deploy:
-      mode: replicated
-      replicas: 2
+    # deploy:
+    #   mode: replicated
+    #   replicas: 2
     depends_on:
       - spark-master
 

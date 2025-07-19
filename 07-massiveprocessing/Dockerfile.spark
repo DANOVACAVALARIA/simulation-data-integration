@@ -9,7 +9,40 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
+# instalação do DIS
 COPY ./open-dis-python /tmp/open-dis-python
-
 WORKDIR /tmp/open-dis-python
 RUN pip install --no-cache-dir .
+
+# volta para o diretório de trabalho padrão
+WORKDIR /opt/bitnami/spark
+
+
+
+
+
+
+
+
+# # FROM bitnami/spark:3.5.5
+
+# # USER root
+
+# # RUN apt-get update && apt-get install -y wget && apt-get clean
+
+# # COPY requirements.txt /tmp/requirements.txt
+
+# # RUN pip install --upgrade pip
+# # RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# # # instalação do DIS
+# # COPY ./open-dis-python /tmp/open-dis-python
+
+# # WORKDIR /tmp/open-dis-python
+# # RUN pip install --no-cache-dir .
+
+# # # instalação do Sword
+# # COPY ./protobuf_schemas /tmp/protobuf_schemas
+
+# # WORKDIR /tmp/protobuf_schemas
+# # RUN pip install --no-cache-dir .

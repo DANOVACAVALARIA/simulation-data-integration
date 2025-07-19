@@ -1,0 +1,21 @@
+[2025-07-04T18:59:22.444+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-04T18:59:22.508+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: process_exercises.update_manifest_to_processed manual__2025-07-04T18:53:59.614250+00:00 [queued]>
+[2025-07-04T18:59:22.525+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: process_exercises.update_manifest_to_processed manual__2025-07-04T18:53:59.614250+00:00 [queued]>
+[2025-07-04T18:59:22.526+0000] {taskinstance.py:2884} INFO - Starting attempt 1 of 1
+[2025-07-04T18:59:22.664+0000] {taskinstance.py:2907} INFO - Executing <Task(PythonOperator): update_manifest_to_processed> on 2025-07-04 18:53:59.614250+00:00
+[2025-07-04T18:59:22.681+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=764) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-04T18:59:22.683+0000] {standard_task_runner.py:72} INFO - Started process 765 to run task
+[2025-07-04T18:59:22.680+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'process_exercises', 'update_manifest_to_processed', 'manual__2025-07-04T18:53:59.614250+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/process_exercises.py', '--cfg-path', '/tmp/tmphhzw0vyn']
+[2025-07-04T18:59:22.684+0000] {standard_task_runner.py:105} INFO - Job 30: Subtask update_manifest_to_processed
+[2025-07-04T18:59:23.053+0000] {task_command.py:467} INFO - Running <TaskInstance: process_exercises.update_manifest_to_processed manual__2025-07-04T18:53:59.614250+00:00 [running]> on host 015f5eedea58
+[2025-07-04T18:59:23.615+0000] {taskinstance.py:3157} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='process_exercises' AIRFLOW_CTX_TASK_ID='update_manifest_to_processed' AIRFLOW_CTX_EXECUTION_DATE='2025-07-04T18:53:59.614250+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-04T18:53:59.614250+00:00'
+[2025-07-04T18:59:23.619+0000] {taskinstance.py:740} INFO - ::endgroup::
+[2025-07-04T18:59:24.988+0000] {base.py:84} INFO - Retrieving connection 'minio-ebsim'
+[2025-07-04T18:59:24.990+0000] {connection_wrapper.py:391} INFO - AWS Connection (conn_id='minio-ebsim', conn_type='aws') credentials retrieved from extra.
+[2025-07-04T18:59:28.249+0000] {logging_mixin.py:190} INFO - Exercício CA-LESTE-construtiva-4DE-2025-07-04 movido para 'processed'
+[2025-07-04T18:59:28.251+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-07-04T18:59:28.278+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2025-07-04T18:59:28.279+0000] {taskinstance.py:361} INFO - Marking task as SUCCESS. dag_id=process_exercises, task_id=update_manifest_to_processed, run_id=manual__2025-07-04T18:53:59.614250+00:00, execution_date=20250704T185359, start_date=20250704T185922, end_date=20250704T185928
+[2025-07-04T18:59:28.693+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-07-04T18:59:28.727+0000] {taskinstance.py:3924} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T18:59:29.048+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

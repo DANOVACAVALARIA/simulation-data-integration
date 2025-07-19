@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "orchestrator": "node orchestrator.js",
+    "listener-dis": "node ./listener-dis/listener-dis.js",
+    "generator-dis": "node ./generator-dis/generator-dis.js",
     "generator-proto": "node ./generator-proto/generator-proto.js"
   },
   "author": "JNDN",

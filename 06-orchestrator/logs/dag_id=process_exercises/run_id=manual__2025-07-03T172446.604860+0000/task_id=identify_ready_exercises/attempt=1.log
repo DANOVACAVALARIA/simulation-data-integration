@@ -1,0 +1,23 @@
+[2025-07-03T17:24:49.018+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-03T17:24:49.061+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: process_exercises.identify_ready_exercises manual__2025-07-03T17:24:46.604860+00:00 [queued]>
+[2025-07-03T17:24:49.074+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: process_exercises.identify_ready_exercises manual__2025-07-03T17:24:46.604860+00:00 [queued]>
+[2025-07-03T17:24:49.075+0000] {taskinstance.py:2884} INFO - Starting attempt 1 of 1
+[2025-07-03T17:24:49.130+0000] {taskinstance.py:2907} INFO - Executing <Task(PythonOperator): identify_ready_exercises> on 2025-07-03 17:24:46.604860+00:00
+[2025-07-03T17:24:49.141+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=809) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-03T17:24:49.143+0000] {standard_task_runner.py:72} INFO - Started process 810 to run task
+[2025-07-03T17:24:49.141+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'process_exercises', 'identify_ready_exercises', 'manual__2025-07-03T17:24:46.604860+00:00', '--job-id', '120', '--raw', '--subdir', 'DAGS_FOLDER/process_exercises.py', '--cfg-path', '/tmp/tmp6j_df63e']
+[2025-07-03T17:24:49.145+0000] {standard_task_runner.py:105} INFO - Job 120: Subtask identify_ready_exercises
+[2025-07-03T17:24:49.274+0000] {task_command.py:467} INFO - Running <TaskInstance: process_exercises.identify_ready_exercises manual__2025-07-03T17:24:46.604860+00:00 [running]> on host e0709f8eceeb
+[2025-07-03T17:24:49.565+0000] {taskinstance.py:3157} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='process_exercises' AIRFLOW_CTX_TASK_ID='identify_ready_exercises' AIRFLOW_CTX_EXECUTION_DATE='2025-07-03T17:24:46.604860+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-03T17:24:46.604860+00:00'
+[2025-07-03T17:24:49.570+0000] {taskinstance.py:740} INFO - ::endgroup::
+[2025-07-03T17:24:49.641+0000] {base.py:84} INFO - Retrieving connection 'minio-ebsim'
+[2025-07-03T17:24:49.642+0000] {connection_wrapper.py:391} INFO - AWS Connection (conn_id='minio-ebsim', conn_type='aws') credentials retrieved from extra.
+[2025-07-03T17:24:50.004+0000] {logging_mixin.py:190} INFO - [DAG] exercício pronto: CA-LESTE-construtiva-1DE-2025-07-03
+[2025-07-03T17:24:50.004+0000] {logging_mixin.py:190} INFO - ✅ [DAG] total de exercícios prontos: 1.
+[2025-07-03T17:24:50.005+0000] {logging_mixin.py:190} INFO - ✅ [DAG] o exercício selecionado é CA-LESTE-construtiva-1DE-2025-07-03.
+[2025-07-03T17:24:50.006+0000] {python.py:240} INFO - Done. Returned value was: {'id': 'CA-LESTE-construtiva-1DE-2025-07-03', 'metadata': {'id': 'CA-LESTE-construtiva-1DE-2025-07-03', 'name': 'Jogo de Guerra', 'description': '1DE', 'simulationType': 'construtiva', 'origin': 'CA-LESTE', 'startDate': '2025-07-03', 'endDate': '2025-07-05', 'trainedForce': '1 Divisão de Exército', 'wikiUrl': '', 'documents': [{'id': '1751562705430', 'name': 'Op Jacui IV - Ordem de Operacoes.pdf', 'description': '', 'path': 'exercises/CA-LESTE-construtiva-1DE-2025-07-03/documents/Op Jacui IV - Ordem de Operacoes.pdf', 'size': 336744, 'mimetype': 'application/pdf', 'uploadedAt': '2025-07-03T17:11:45.430Z'}], 'simulations': [{'id': '172.19.0.5_2025-07-03', 'name': '172.19.0.5_2025-07-03', 'path': 'exercises/CA-LESTE-construtiva-1DE-2025-07-03/simulations/172.19.0.5_2025-07-03', 'originalPath': 'staging/172.19.0.5_2025-07-03', 'movedAt': '2025-07-03T17:11:53.937Z'}], 'createdAt': '2025-07-03T17:09:15.637Z', 'updatedAt': '2025-07-03T17:11:53.937Z'}, 'manifest_entry': {'id': 'CA-LESTE-construtiva-1DE-2025-07-03', 'data': {'origin': 'CA-LESTE', 'path': 'exercises/CA-LESTE-construtiva-1DE-2025-07-03', 'createdAt': '2025-07-03T17:09:15.637Z'}}}
+[2025-07-03T17:24:50.098+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2025-07-03T17:24:50.099+0000] {taskinstance.py:361} INFO - Marking task as SUCCESS. dag_id=process_exercises, task_id=identify_ready_exercises, run_id=manual__2025-07-03T17:24:46.604860+00:00, execution_date=20250703T172446, start_date=20250703T172449, end_date=20250703T172450
+[2025-07-03T17:24:50.247+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-07-03T17:24:50.290+0000] {taskinstance.py:3924} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-03T17:24:50.338+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

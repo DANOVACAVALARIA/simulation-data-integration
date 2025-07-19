@@ -1,0 +1,747 @@
+[2025-07-08T16:10:51.534+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-08T16:10:51.590+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: process_exercises.process_exercises manual__2025-07-08T16:10:47.275410+00:00 [queued]>
+[2025-07-08T16:10:51.607+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: process_exercises.process_exercises manual__2025-07-08T16:10:47.275410+00:00 [queued]>
+[2025-07-08T16:10:51.608+0000] {taskinstance.py:2884} INFO - Starting attempt 1 of 1
+[2025-07-08T16:10:51.800+0000] {taskinstance.py:2907} INFO - Executing <Task(SparkSubmitOperator): process_exercises> on 2025-07-08 16:10:47.275410+00:00
+[2025-07-08T16:10:51.815+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=5986) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-08T16:10:51.816+0000] {standard_task_runner.py:72} INFO - Started process 5987 to run task
+[2025-07-08T16:10:51.814+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'process_exercises', 'process_exercises', 'manual__2025-07-08T16:10:47.275410+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/process_exercises.py', '--cfg-path', '/tmp/tmp_3x2rv17']
+[2025-07-08T16:10:51.818+0000] {standard_task_runner.py:105} INFO - Job 154: Subtask process_exercises
+[2025-07-08T16:10:51.943+0000] {task_command.py:467} INFO - Running <TaskInstance: process_exercises.process_exercises manual__2025-07-08T16:10:47.275410+00:00 [running]> on host 3748f1b8240a
+[2025-07-08T16:10:52.190+0000] {taskinstance.py:3157} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='process_exercises' AIRFLOW_CTX_TASK_ID='process_exercises' AIRFLOW_CTX_EXECUTION_DATE='2025-07-08T16:10:47.275410+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-08T16:10:47.275410+00:00'
+[2025-07-08T16:10:52.192+0000] {taskinstance.py:740} INFO - ::endgroup::
+[2025-07-08T16:10:52.252+0000] {base.py:84} INFO - Retrieving connection 'spark-ebsim'
+[2025-07-08T16:10:52.262+0000] {spark_submit.py:474} INFO - Spark-Submit cmd: spark-submit --master spark://spark-master:7077 --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar,/opt/bitnami/spark/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar,/opt/bitnami/spark/jars/nessie-client-0.103.2.jar,/opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar,/opt/bitnami/spark/jars/aws-java-sdk-bundle-1.12.262.jar, --name arrow-spark --deploy-mode client /opt/bitnami/spark/jobs/process_exercises_job.py {"id": "CA-SUL-virtual-17RCMe-2025-07-08", "manifest_entry": {"data": {"createdAt": "2025-07-08T16:07:52.045Z", "origin": "CA-SUL", "path": "exercises/CA-SUL-virtual-17RCMe-2025-07-08"}, "id": "CA-SUL-virtual-17RCMe-2025-07-08"}, "metadata": {"createdAt": "2025-07-08T16:07:52.045Z", "description": "17RCMec", "documents": [{"description": "", "id": "1751990882540", "mimetype": "application/pdf", "name": "Op Jacui IV - Anexo A - Inteligencia.pdf", "path": "exercises/CA-SUL-virtual-17RCMe-2025-07-08/documents/Op Jacui IV - Anexo A - Inteligencia.pdf", "size": 47523, "uploadedAt": "2025-07-08T16:08:02.540Z"}], "endDate": "2025-07-09", "id": "CA-SUL-virtual-17RCMe-2025-07-08", "name": "Exerc\u00edcio Virtual", "origin": "CA-SUL", "simulationType": "virtual", "simulations": [{"id": "172.19.0.14_2025-07-08", "movedAt": "2025-07-08T16:08:10.793Z", "name": "172.19.0.14_2025-07-08", "originalPath": "staging/172.19.0.14_2025-07-08", "path": "exercises/CA-SUL-virtual-17RCMe-2025-07-08/simulations/172.19.0.14_2025-07-08"}], "startDate": "2025-07-08", "trainedForce": "17 Regimento de Cavalaria Mecanizado", "updatedAt": "2025-07-08T16:08:10.794Z", "wikiUrl": ""}}
+[2025-07-08T16:10:54.852+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:54 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-07-08T16:10:56.554+0000] {spark_submit.py:644} INFO - 🚀 Iniciando processamento de exercícios...
+[2025-07-08T16:10:56.554+0000] {spark_submit.py:644} INFO - ⚡ Iniciando sessão Spark...
+[2025-07-08T16:10:57.105+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Running Spark version 3.5.5
+[2025-07-08T16:10:57.105+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: OS info Linux, 5.15.167.4-microsoft-standard-WSL2, amd64
+[2025-07-08T16:10:57.106+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Java version 17.0.15
+[2025-07-08T16:10:57.142+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceUtils: ==============================================================
+[2025-07-08T16:10:57.143+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2025-07-08T16:10:57.144+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceUtils: ==============================================================
+[2025-07-08T16:10:57.144+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Submitted application: ProcessExercises
+[2025-07-08T16:10:57.164+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2025-07-08T16:10:57.172+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceProfile: Limiting resource is cpu
+[2025-07-08T16:10:57.172+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2025-07-08T16:10:57.216+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SecurityManager: Changing view acls to: airflow
+[2025-07-08T16:10:57.217+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SecurityManager: Changing modify acls to: airflow
+[2025-07-08T16:10:57.218+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SecurityManager: Changing view acls groups to:
+[2025-07-08T16:10:57.218+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SecurityManager: Changing modify acls groups to:
+[2025-07-08T16:10:57.219+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: airflow; groups with view permissions: EMPTY; users with modify permissions: airflow; groups with modify permissions: EMPTY
+[2025-07-08T16:10:57.468+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO Utils: Successfully started service 'sparkDriver' on port 36493.
+[2025-07-08T16:10:57.499+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkEnv: Registering MapOutputTracker
+[2025-07-08T16:10:57.547+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkEnv: Registering BlockManagerMaster
+[2025-07-08T16:10:57.567+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2025-07-08T16:10:57.568+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2025-07-08T16:10:57.572+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2025-07-08T16:10:57.610+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-939eaa09-ef3d-468d-8da4-bfed253e860a
+[2025-07-08T16:10:57.620+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2025-07-08T16:10:57.632+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkEnv: Registering OutputCommitCoordinator
+[2025-07-08T16:10:57.735+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2025-07-08T16:10:57.795+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[2025-07-08T16:10:57.842+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar at spark://3748f1b8240a:36493/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar with timestamp 1751991057098
+[2025-07-08T16:10:57.843+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar at spark://3748f1b8240a:36493/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar with timestamp 1751991057098
+[2025-07-08T16:10:57.844+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/nessie-client-0.103.2.jar at spark://3748f1b8240a:36493/jars/nessie-client-0.103.2.jar with timestamp 1751991057098
+[2025-07-08T16:10:57.845+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar at spark://3748f1b8240a:36493/jars/hadoop-aws-3.3.2.jar with timestamp 1751991057098
+[2025-07-08T16:10:57.846+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO SparkContext: Added JAR file:///opt/bitnami/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://3748f1b8240a:36493/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1751991057098
+[2025-07-08T16:10:57.946+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+[2025-07-08T16:10:57.991+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:57 INFO TransportClientFactory: Successfully created connection to spark-master/172.19.0.2:7077 after 24 ms (0 ms spent in bootstraps)
+[2025-07-08T16:10:58.091+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20250708161058-0008
+[2025-07-08T16:10:58.094+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20250708161058-0008/0 on worker-20250708130010-172.19.0.8-33627 (172.19.0.8:33627) with 2 core(s)
+[2025-07-08T16:10:58.098+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO StandaloneSchedulerBackend: Granted executor ID app-20250708161058-0008/0 on hostPort 172.19.0.8:33627 with 2 core(s), 1024.0 MiB RAM
+[2025-07-08T16:10:58.102+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42647.
+[2025-07-08T16:10:58.103+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO NettyBlockTransferService: Server created on 3748f1b8240a:42647
+[2025-07-08T16:10:58.104+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2025-07-08T16:10:58.137+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 3748f1b8240a, 42647, None)
+[2025-07-08T16:10:58.141+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO BlockManagerMasterEndpoint: Registering block manager 3748f1b8240a:42647 with 434.4 MiB RAM, BlockManagerId(driver, 3748f1b8240a, 42647, None)
+[2025-07-08T16:10:58.144+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 3748f1b8240a, 42647, None)
+[2025-07-08T16:10:58.145+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 3748f1b8240a, 42647, None)
+[2025-07-08T16:10:58.240+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20250708161058-0008/0 is now RUNNING
+[2025-07-08T16:10:58.446+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2025-07-08T16:10:58.686+0000] {spark_submit.py:644} INFO - ⚡ Sessão Spark criada com sucesso
+[2025-07-08T16:10:58.686+0000] {spark_submit.py:644} INFO - 🏗️ Criando namespace...
+[2025-07-08T16:10:58.695+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+[2025-07-08T16:10:58.698+0000] {spark_submit.py:644} INFO - 25/07/08 16:10:58 INFO SharedState: Warehouse path is 'file:/opt/airflow/spark-warehouse'.
+[2025-07-08T16:11:01.103+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:01 INFO CatalogUtil: Loading custom FileIO implementation: org.apache.iceberg.hadoop.HadoopFileIO
+[2025-07-08T16:11:01.543+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:01 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.19.0.8:50294) with ID 0,  ResourceProfileId 0
+[2025-07-08T16:11:01.616+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:01 INFO BlockManagerMasterEndpoint: Registering block manager 172.19.0.8:43687 with 434.4 MiB RAM, BlockManagerId(0, 172.19.0.8, 43687, None)
+[2025-07-08T16:11:02.717+0000] {spark_submit.py:644} INFO - 📄 Iniciando processamento de documentos...
+[2025-07-08T16:11:02.991+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:02 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+[2025-07-08T16:11:02.999+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:02 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-07-08T16:11:03.000+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:02 INFO MetricsSystemImpl: s3a-file-system metrics system started
+[2025-07-08T16:11:04.690+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:04 INFO InMemoryFileIndex: It took 58 ms to list leaf files for 1 paths.
+[2025-07-08T16:11:05.131+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:05 INFO FileSourceStrategy: Pushed Filters:
+[2025-07-08T16:11:05.132+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:05 INFO FileSourceStrategy: Post-Scan Filters:
+[2025-07-08T16:11:05.877+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:05 INFO CodeGenerator: Code generated in 305.990517 ms
+[2025-07-08T16:11:05.949+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:05 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 203.5 KiB, free 434.2 MiB)
+[2025-07-08T16:11:06.348+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 35.7 KiB, free 434.2 MiB)
+[2025-07-08T16:11:06.594+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 3748f1b8240a:42647 (size: 35.7 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:06.724+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO SparkContext: Created broadcast 0 from collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83
+[2025-07-08T16:11:06.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194304 bytes, open cost is considered as scanning 4194304 bytes.
+[2025-07-08T16:11:06.875+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO SparkContext: Starting job: collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83
+[2025-07-08T16:11:06.889+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO DAGScheduler: Got job 0 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83) with 1 output partitions
+[2025-07-08T16:11:06.889+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO DAGScheduler: Final stage: ResultStage 0 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83)
+[2025-07-08T16:11:06.890+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO DAGScheduler: Parents of final stage: List()
+[2025-07-08T16:11:06.890+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:06.895+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:06 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[5] at collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83), which has no missing parents
+[2025-07-08T16:11:07.049+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 24.5 KiB, free 434.1 MiB)
+[2025-07-08T16:11:07.139+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 11.6 KiB, free 434.1 MiB)
+[2025-07-08T16:11:07.143+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 3748f1b8240a:42647 (size: 11.6 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:07.145+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:07.176+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[5] at collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83) (first 15 tasks are for partitions Vector(0))
+[2025-07-08T16:11:07.178+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:07 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks resource profile 0
+[2025-07-08T16:11:11.719+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:11 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10201 bytes)
+[2025-07-08T16:11:11.931+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:11 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 172.19.0.8:43687 (size: 11.6 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:13.839+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:13 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 172.19.0.8:43687 (size: 35.7 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:15.753+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:15 WARN TaskSetManager: Lost task 0.0 in stage 0.0 (TID 0) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:15.755+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:15.756+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:15.758+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.760+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:15.761+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:15.763+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.765+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:15.766+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:15.768+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.770+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:15.771+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:15.773+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.775+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:15.777+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:15.778+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.780+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:15.781+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:15.783+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:15.785+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:15.787+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:15.789+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:15.790+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:15.792+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:15.793+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:15.794+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:15.796+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:15.797+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:15.798+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:15.800+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:15.801+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:15.802+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:15.804+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+[2025-07-08T16:11:15.806+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+[2025-07-08T16:11:15.808+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+[2025-07-08T16:11:15.809+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+[2025-07-08T16:11:15.829+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+[2025-07-08T16:11:15.830+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+[2025-07-08T16:11:15.832+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+[2025-07-08T16:11:15.833+0000] {spark_submit.py:644} INFO - at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+[2025-07-08T16:11:15.835+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.Task.run(Task.scala:141)
+[2025-07-08T16:11:15.837+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+[2025-07-08T16:11:15.838+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+[2025-07-08T16:11:15.840+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+[2025-07-08T16:11:15.841+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+[2025-07-08T16:11:15.842+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+[2025-07-08T16:11:15.844+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[2025-07-08T16:11:15.845+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[2025-07-08T16:11:15.846+0000] {spark_submit.py:644} INFO - at java.base/java.lang.Thread.run(Unknown Source)
+[2025-07-08T16:11:15.848+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:15.850+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:15 INFO TaskSetManager: Starting task 0.1 in stage 0.0 (TID 1) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10201 bytes)
+[2025-07-08T16:11:16.289+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSetManager: Lost task 0.1 in stage 0.0 (TID 1) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:16.289+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:16.290+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:16.291+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.291+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:16.292+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:16.293+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.293+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:16.294+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:16.295+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.295+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:16.296+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:16.297+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.298+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:16.299+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:16.299+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.300+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:16.301+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:16.301+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.302+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:16.302+0000] {spark_submit.py:644} INFO - ) [duplicate 1]
+[2025-07-08T16:11:16.303+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSetManager: Starting task 0.2 in stage 0.0 (TID 2) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10201 bytes)
+[2025-07-08T16:11:16.456+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSetManager: Lost task 0.2 in stage 0.0 (TID 2) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:16.457+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:16.457+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:16.458+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.458+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:16.459+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:16.459+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.460+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:16.460+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:16.461+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.461+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:16.462+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:16.462+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.463+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:16.464+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:16.464+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.465+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:16.465+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:16.466+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.467+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:16.467+0000] {spark_submit.py:644} INFO - ) [duplicate 2]
+[2025-07-08T16:11:16.468+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSetManager: Starting task 0.3 in stage 0.0 (TID 3) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10201 bytes)
+[2025-07-08T16:11:16.617+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSetManager: Lost task 0.3 in stage 0.0 (TID 3) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:16.618+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:16.619+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:16.619+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.620+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:16.621+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:16.621+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.622+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:16.623+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:16.623+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.624+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:16.624+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:16.625+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.626+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:16.626+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:16.627+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.628+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:16.628+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:16.629+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.630+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:16.630+0000] {spark_submit.py:644} INFO - ) [duplicate 3]
+[2025-07-08T16:11:16.631+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 ERROR TaskSetManager: Task 0 in stage 0.0 failed 4 times; aborting job
+[2025-07-08T16:11:16.631+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:16.632+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSchedulerImpl: Cancelling stage 0
+[2025-07-08T16:11:16.632+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage cancelled: Job aborted due to stage failure: Task 0 in stage 0.0 failed 4 times, most recent failure: Lost task 0.3 in stage 0.0 (TID 3) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:16.633+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:16.634+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:16.634+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.634+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:16.635+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:16.635+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.636+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:16.636+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:16.637+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.637+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:16.638+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:16.638+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.639+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:16.639+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:16.640+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.640+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:16.641+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:16.641+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.642+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:16.642+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:16.642+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:16.643+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:16.643+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:16.644+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:16.644+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:16.645+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:16.645+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:16.646+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:16.646+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:16.647+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:16.647+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:16.648+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+[2025-07-08T16:11:16.648+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+[2025-07-08T16:11:16.649+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+[2025-07-08T16:11:16.649+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+[2025-07-08T16:11:16.650+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+[2025-07-08T16:11:16.650+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+[2025-07-08T16:11:16.650+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+[2025-07-08T16:11:16.651+0000] {spark_submit.py:644} INFO - at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+[2025-07-08T16:11:16.651+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.Task.run(Task.scala:141)
+[2025-07-08T16:11:16.652+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+[2025-07-08T16:11:16.653+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+[2025-07-08T16:11:16.653+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+[2025-07-08T16:11:16.654+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+[2025-07-08T16:11:16.654+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+[2025-07-08T16:11:16.655+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[2025-07-08T16:11:16.655+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[2025-07-08T16:11:16.656+0000] {spark_submit.py:644} INFO - at java.base/java.lang.Thread.run(Unknown Source)
+[2025-07-08T16:11:16.656+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:16.657+0000] {spark_submit.py:644} INFO - Driver stacktrace:
+[2025-07-08T16:11:16.657+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO DAGScheduler: ResultStage 0 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83) failed in 9.633 s due to Job aborted due to stage failure: Task 0 in stage 0.0 failed 4 times, most recent failure: Lost task 0.3 in stage 0.0 (TID 3) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:16.658+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:16.658+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:16.659+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.659+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:16.660+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:16.660+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.661+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:16.661+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:16.662+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.663+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:16.663+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:16.664+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.664+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:16.665+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:16.665+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.666+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:16.666+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:16.667+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:16.667+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_pdf'
+[2025-07-08T16:11:16.668+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:16.669+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:16.669+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:16.670+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:16.670+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:16.671+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:16.671+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:16.671+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:16.672+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:16.672+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:16.673+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:16.673+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:16.674+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+[2025-07-08T16:11:16.674+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+[2025-07-08T16:11:16.675+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+[2025-07-08T16:11:16.675+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+[2025-07-08T16:11:16.676+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+[2025-07-08T16:11:16.676+0000] {spark_submit.py:644} INFO - at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+[2025-07-08T16:11:16.676+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+[2025-07-08T16:11:16.677+0000] {spark_submit.py:644} INFO - at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+[2025-07-08T16:11:16.677+0000] {spark_submit.py:644} INFO - at org.apache.spark.scheduler.Task.run(Task.scala:141)
+[2025-07-08T16:11:16.678+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+[2025-07-08T16:11:16.678+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+[2025-07-08T16:11:16.679+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+[2025-07-08T16:11:16.679+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+[2025-07-08T16:11:16.680+0000] {spark_submit.py:644} INFO - at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+[2025-07-08T16:11:16.680+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[2025-07-08T16:11:16.681+0000] {spark_submit.py:644} INFO - at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[2025-07-08T16:11:16.681+0000] {spark_submit.py:644} INFO - at java.base/java.lang.Thread.run(Unknown Source)
+[2025-07-08T16:11:16.681+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:16.682+0000] {spark_submit.py:644} INFO - Driver stacktrace:
+[2025-07-08T16:11:16.682+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:16 INFO DAGScheduler: Job 0 failed: collect at /opt/bitnami/spark/jobs/process_exercises_job.py:83, took 9.755060 s
+[2025-07-08T16:11:16.838+0000] {spark_submit.py:644} INFO - 📄 Processamento concluído: 1 documentos
+[2025-07-08T16:11:19.904+0000] {spark_submit.py:644} INFO - 💾 Salvando documentos...
+[2025-07-08T16:11:20.191+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO CodeGenerator: Code generated in 14.525737 ms
+[2025-07-08T16:11:20.211+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Registering RDD 12 (count at NativeMethodAccessorImpl.java:0) as input to shuffle 0
+[2025-07-08T16:11:20.214+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Got map stage job 1 (count at NativeMethodAccessorImpl.java:0) with 2 output partitions
+[2025-07-08T16:11:20.215+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Final stage: ShuffleMapStage 1 (count at NativeMethodAccessorImpl.java:0)
+[2025-07-08T16:11:20.215+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Parents of final stage: List()
+[2025-07-08T16:11:20.216+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:20.217+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Submitting ShuffleMapStage 1 (MapPartitionsRDD[12] at count at NativeMethodAccessorImpl.java:0), which has no missing parents
+[2025-07-08T16:11:20.233+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 16.0 KiB, free 434.1 MiB)
+[2025-07-08T16:11:20.235+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 8.4 KiB, free 434.1 MiB)
+[2025-07-08T16:11:20.236+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 3748f1b8240a:42647 (size: 8.4 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:20.236+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:20.238+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 1 (MapPartitionsRDD[12] at count at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1))
+[2025-07-08T16:11:20.239+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO TaskSchedulerImpl: Adding task set 1.0 with 2 tasks resource profile 0
+[2025-07-08T16:11:20.242+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 4) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 9487 bytes)
+[2025-07-08T16:11:20.242+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 5) (172.19.0.8, executor 0, partition 1, PROCESS_LOCAL, 11109 bytes)
+[2025-07-08T16:11:20.260+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:20 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 172.19.0.8:43687 (size: 8.4 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:21.842+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:21 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 4) in 1602 ms on 172.19.0.8 (executor 0) (1/2)
+[2025-07-08T16:11:21.844+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:21 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 42421
+[2025-07-08T16:11:22.189+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 5) in 1946 ms on 172.19.0.8 (executor 0) (2/2)
+[2025-07-08T16:11:22.190+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:22.193+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: ShuffleMapStage 1 (count at NativeMethodAccessorImpl.java:0) finished in 1.971 s
+[2025-07-08T16:11:22.195+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: looking for newly runnable stages
+[2025-07-08T16:11:22.196+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: running: Set()
+[2025-07-08T16:11:22.196+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: waiting: Set()
+[2025-07-08T16:11:22.197+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: failed: Set()
+[2025-07-08T16:11:22.381+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO CodeGenerator: Code generated in 14.510233 ms
+[2025-07-08T16:11:22.429+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO SparkContext: Starting job: count at NativeMethodAccessorImpl.java:0
+[2025-07-08T16:11:22.432+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Got job 2 (count at NativeMethodAccessorImpl.java:0) with 1 output partitions
+[2025-07-08T16:11:22.433+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Final stage: ResultStage 3 (count at NativeMethodAccessorImpl.java:0)
+[2025-07-08T16:11:22.434+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
+[2025-07-08T16:11:22.436+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:22.437+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Submitting ResultStage 3 (MapPartitionsRDD[15] at count at NativeMethodAccessorImpl.java:0), which has no missing parents
+[2025-07-08T16:11:22.448+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_1_piece0 on 3748f1b8240a:42647 in memory (size: 11.6 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.450+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 12.5 KiB, free 434.1 MiB)
+[2025-07-08T16:11:22.459+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_1_piece0 on 172.19.0.8:43687 in memory (size: 11.6 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.474+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 172.19.0.8:43687 in memory (size: 8.4 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.489+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 3748f1b8240a:42647 in memory (size: 8.4 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.490+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 5.9 KiB, free 434.1 MiB)
+[2025-07-08T16:11:22.491+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on 3748f1b8240a:42647 (size: 5.9 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.528+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:22.529+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 3 (MapPartitionsRDD[15] at count at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+[2025-07-08T16:11:22.530+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO TaskSchedulerImpl: Adding task set 3.0 with 1 tasks resource profile 0
+[2025-07-08T16:11:22.535+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO TaskSetManager: Starting task 0.0 in stage 3.0 (TID 6) (172.19.0.8, executor 0, partition 0, NODE_LOCAL, 9518 bytes)
+[2025-07-08T16:11:22.564+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on 172.19.0.8:43687 (size: 5.9 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.595+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 3748f1b8240a:42647 in memory (size: 35.7 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.647+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 172.19.0.8:43687 in memory (size: 35.7 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:22.666+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:22 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.19.0.8:50294
+[2025-07-08T16:11:23.347+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO TaskSetManager: Finished task 0.0 in stage 3.0 (TID 6) in 813 ms on 172.19.0.8 (executor 0) (1/1)
+[2025-07-08T16:11:23.347+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO TaskSchedulerImpl: Removed TaskSet 3.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:23.348+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO DAGScheduler: ResultStage 3 (count at NativeMethodAccessorImpl.java:0) finished in 0.903 s
+[2025-07-08T16:11:23.349+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO DAGScheduler: Job 2 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-07-08T16:11:23.350+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO TaskSchedulerImpl: Killing all running tasks in stage 3: Stage finished
+[2025-07-08T16:11:23.351+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO DAGScheduler: Job 2 finished: count at NativeMethodAccessorImpl.java:0, took 0.921598 s
+[2025-07-08T16:11:23.433+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO BaseMetastoreTableOperations: Refreshing table metadata from new version: s3a://warehouse/exercises/pdf_documents_3f2f6938-06f1-4401-a884-d6a6de9720a0/metadata/00018-2829fa96-ea81-471c-8bcd-09f5f461f211.metadata.json
+[2025-07-08T16:11:23.610+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO NessieUtil: loadTableMetadata for 'exercises.pdf_documents' from location 's3a://warehouse/exercises/pdf_documents_3f2f6938-06f1-4401-a884-d6a6de9720a0/metadata/00018-2829fa96-ea81-471c-8bcd-09f5f461f211.metadata.json' at 'Branch{name=main, metadata=null, hash=16a27830d63cbc52eac879d1c3bc8865ba301f4accf6f872b0ddc13c0295e4c8}'
+[2025-07-08T16:11:23.632+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:23 INFO BaseMetastoreCatalog: Table loaded by catalog: nessie.exercises.pdf_documents
+[2025-07-08T16:11:24.272+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:24 INFO BlockManagerInfo: Removed broadcast_3_piece0 on 3748f1b8240a:42647 in memory (size: 5.9 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:24.274+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:24 INFO BlockManagerInfo: Removed broadcast_3_piece0 on 172.19.0.8:43687 in memory (size: 5.9 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:25.107+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO CodeGenerator: Code generated in 34.165763 ms
+[2025-07-08T16:11:25.229+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkWrite: Requesting 0 bytes advisory partition size for table nessie.exercises.pdf_documents
+[2025-07-08T16:11:25.230+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkWrite: Requesting UnspecifiedDistribution as write distribution for table nessie.exercises.pdf_documents
+[2025-07-08T16:11:25.231+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkWrite: Requesting [] as write ordering for table nessie.exercises.pdf_documents
+[2025-07-08T16:11:25.258+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO CodeGenerator: Code generated in 11.802969 ms
+[2025-07-08T16:11:25.274+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO MemoryStore: Block broadcast_4 stored as values in memory (estimated size 32.0 KiB, free 434.4 MiB)
+[2025-07-08T16:11:25.357+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 30.1 KiB, free 434.3 MiB)
+[2025-07-08T16:11:25.507+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 3748f1b8240a:42647 (size: 30.1 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:25.508+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkContext: Created broadcast 4 from broadcast at SparkWrite.java:193
+[2025-07-08T16:11:25.511+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO AppendDataExec: Start processing data source write support: IcebergBatchWrite(table=nessie.exercises.pdf_documents, format=PARQUET). The input RDD has 2 partitions.
+[2025-07-08T16:11:25.524+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkContext: Starting job: saveAsTable at NativeMethodAccessorImpl.java:0
+[2025-07-08T16:11:25.527+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Got job 3 (saveAsTable at NativeMethodAccessorImpl.java:0) with 2 output partitions
+[2025-07-08T16:11:25.527+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Final stage: ResultStage 4 (saveAsTable at NativeMethodAccessorImpl.java:0)
+[2025-07-08T16:11:25.528+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Parents of final stage: List()
+[2025-07-08T16:11:25.529+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:25.530+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Submitting ResultStage 4 (MapPartitionsRDD[16] at saveAsTable at NativeMethodAccessorImpl.java:0), which has no missing parents
+[2025-07-08T16:11:25.532+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO MemoryStore: Block broadcast_5 stored as values in memory (estimated size 15.1 KiB, free 434.3 MiB)
+[2025-07-08T16:11:25.588+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 7.8 KiB, free 434.3 MiB)
+[2025-07-08T16:11:25.729+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 3748f1b8240a:42647 (size: 7.8 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:25.730+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:25.731+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 4 (MapPartitionsRDD[16] at saveAsTable at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1))
+[2025-07-08T16:11:25.732+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO TaskSchedulerImpl: Adding task set 4.0 with 2 tasks resource profile 0
+[2025-07-08T16:11:25.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO TaskSetManager: Starting task 0.0 in stage 4.0 (TID 7) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 9498 bytes)
+[2025-07-08T16:11:25.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO TaskSetManager: Starting task 1.0 in stage 4.0 (TID 8) (172.19.0.8, executor 0, partition 1, PROCESS_LOCAL, 11120 bytes)
+[2025-07-08T16:11:25.796+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:25 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 172.19.0.8:43687 (size: 7.8 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:26.186+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:26 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 172.19.0.8:43687 (size: 30.1 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:29.567+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:29 INFO TaskSetManager: Finished task 0.0 in stage 4.0 (TID 7) in 3834 ms on 172.19.0.8 (executor 0) (1/2)
+[2025-07-08T16:11:34.235+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO TaskSetManager: Finished task 1.0 in stage 4.0 (TID 8) in 8501 ms on 172.19.0.8 (executor 0) (2/2)
+[2025-07-08T16:11:34.235+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO TaskSchedulerImpl: Removed TaskSet 4.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:34.236+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO DAGScheduler: ResultStage 4 (saveAsTable at NativeMethodAccessorImpl.java:0) finished in 8.707 s
+[2025-07-08T16:11:34.237+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO DAGScheduler: Job 3 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-07-08T16:11:34.238+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO TaskSchedulerImpl: Killing all running tasks in stage 4: Stage finished
+[2025-07-08T16:11:34.238+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO DAGScheduler: Job 3 finished: saveAsTable at NativeMethodAccessorImpl.java:0, took 8.713316 s
+[2025-07-08T16:11:34.239+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO AppendDataExec: Data source write support IcebergBatchWrite(table=nessie.exercises.pdf_documents, format=PARQUET) is committing.
+[2025-07-08T16:11:34.363+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:34 INFO SparkWrite: Committing append with 1 new data files to table nessie.exercises.pdf_documents
+[2025-07-08T16:11:36.488+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO NessieIcebergClient: Committed 'exercises.pdf_documents' against 'Branch{name=main, metadata=null, hash=c54c90441b033871192de5f0e4e3f712da2ccc193104a5d8611daaa464348f65}', expected commit-id was '16a27830d63cbc52eac879d1c3bc8865ba301f4accf6f872b0ddc13c0295e4c8'
+[2025-07-08T16:11:36.490+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BaseMetastoreTableOperations: Successfully committed to table exercises.pdf_documents in 772 ms
+[2025-07-08T16:11:36.492+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO SnapshotProducer: Committed snapshot 3989413452413104141 (MergeAppend)
+[2025-07-08T16:11:36.550+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BaseMetastoreTableOperations: Refreshing table metadata from new version: s3a://warehouse/exercises/pdf_documents_3f2f6938-06f1-4401-a884-d6a6de9720a0/metadata/00019-c7c02a22-c0d9-4a0f-9c87-01848e25bb50.metadata.json
+[2025-07-08T16:11:36.562+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO NessieUtil: loadTableMetadata for 'exercises.pdf_documents' from location 's3a://warehouse/exercises/pdf_documents_3f2f6938-06f1-4401-a884-d6a6de9720a0/metadata/00019-c7c02a22-c0d9-4a0f-9c87-01848e25bb50.metadata.json' at 'Branch{name=main, metadata=null, hash=c54c90441b033871192de5f0e4e3f712da2ccc193104a5d8611daaa464348f65}'
+[2025-07-08T16:11:36.594+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 3748f1b8240a:42647 in memory (size: 7.8 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:36.595+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 172.19.0.8:43687 in memory (size: 7.8 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:36.606+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO LoggingMetricsReporter: Received metrics report: CommitReport{tableName=nessie.exercises.pdf_documents, snapshotId=3989413452413104141, sequenceNumber=20, operation=append, commitMetrics=CommitMetricsResult{totalDuration=TimerResult{timeUnit=NANOSECONDS, totalDuration=PT2.151559677S, count=1}, attempts=CounterResult{unit=COUNT, value=1}, addedDataFiles=CounterResult{unit=COUNT, value=1}, removedDataFiles=null, totalDataFiles=CounterResult{unit=COUNT, value=20}, addedDeleteFiles=null, addedEqualityDeleteFiles=null, addedPositionalDeleteFiles=null, addedDVs=null, removedDeleteFiles=null, removedEqualityDeleteFiles=null, removedPositionalDeleteFiles=null, removedDVs=null, totalDeleteFiles=CounterResult{unit=COUNT, value=0}, addedRecords=CounterResult{unit=COUNT, value=1}, removedRecords=null, totalRecords=CounterResult{unit=COUNT, value=20}, addedFilesSizeInBytes=CounterResult{unit=BYTES, value=8700}, removedFilesSizeInBytes=null, totalFilesSizeInBytes=CounterResult{unit=BYTES, value=152153}, addedPositionalDeletes=null, removedPositionalDeletes=null, totalPositionalDeletes=CounterResult{unit=COUNT, value=0}, addedEqualityDeletes=null, removedEqualityDeletes=null, totalEqualityDeletes=CounterResult{unit=COUNT, value=0}}, metadata={engine-version=3.5.5, app-id=app-20250708161058-0008, engine-name=spark, iceberg-version=Apache Iceberg 1.8.1 (commit 9ce0fcf0af7becf25ad9fc996c3bad2afdcfd33d)}}
+[2025-07-08T16:11:36.606+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO SparkWrite: Committed in 2240 ms
+[2025-07-08T16:11:36.607+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO AppendDataExec: Data source write support IcebergBatchWrite(table=nessie.exercises.pdf_documents, format=PARQUET) committed.
+[2025-07-08T16:11:36.608+0000] {spark_submit.py:644} INFO - 🎮 Iniciando processamento de simulações...
+[2025-07-08T16:11:36.659+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO InMemoryFileIndex: It took 7 ms to list leaf files for 1 paths.
+[2025-07-08T16:11:36.682+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO FileSourceStrategy: Pushed Filters:
+[2025-07-08T16:11:36.682+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO FileSourceStrategy: Post-Scan Filters:
+[2025-07-08T16:11:36.688+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO MemoryStore: Block broadcast_6 stored as values in memory (estimated size 203.7 KiB, free 434.1 MiB)
+[2025-07-08T16:11:36.701+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 35.7 KiB, free 434.1 MiB)
+[2025-07-08T16:11:36.701+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 3748f1b8240a:42647 (size: 35.7 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:36.702+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO SparkContext: Created broadcast 6 from collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200
+[2025-07-08T16:11:36.703+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4210554 bytes, open cost is considered as scanning 4194304 bytes.
+[2025-07-08T16:11:36.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO SparkContext: Starting job: collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200
+[2025-07-08T16:11:36.734+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Got job 4 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200) with 2 output partitions
+[2025-07-08T16:11:36.735+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Final stage: ResultStage 5 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200)
+[2025-07-08T16:11:36.736+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Parents of final stage: List()
+[2025-07-08T16:11:36.736+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:36.737+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Submitting ResultStage 5 (MapPartitionsRDD[19] at collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200), which has no missing parents
+[2025-07-08T16:11:36.738+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO MemoryStore: Block broadcast_7 stored as values in memory (estimated size 9.4 KiB, free 434.1 MiB)
+[2025-07-08T16:11:36.740+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 4.7 KiB, free 434.1 MiB)
+[2025-07-08T16:11:36.741+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 3748f1b8240a:42647 (size: 4.7 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:36.742+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO SparkContext: Created broadcast 7 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:36.742+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 5 (MapPartitionsRDD[19] at collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200) (first 15 tasks are for partitions Vector(0, 1))
+[2025-07-08T16:11:36.743+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSchedulerImpl: Adding task set 5.0 with 2 tasks resource profile 0
+[2025-07-08T16:11:36.744+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSetManager: Starting task 0.0 in stage 5.0 (TID 9) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10199 bytes)
+[2025-07-08T16:11:36.745+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSetManager: Starting task 1.0 in stage 5.0 (TID 10) (172.19.0.8, executor 0, partition 1, PROCESS_LOCAL, 10202 bytes)
+[2025-07-08T16:11:36.759+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 172.19.0.8:43687 (size: 4.7 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:36.785+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 172.19.0.8:43687 (size: 35.7 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:36.831+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Removed broadcast_4_piece0 on 3748f1b8240a:42647 in memory (size: 30.1 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:36.832+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSetManager: Finished task 1.0 in stage 5.0 (TID 10) in 88 ms on 172.19.0.8 (executor 0) (1/2)
+[2025-07-08T16:11:36.833+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSetManager: Finished task 0.0 in stage 5.0 (TID 9) in 90 ms on 172.19.0.8 (executor 0) (2/2)
+[2025-07-08T16:11:36.834+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSchedulerImpl: Removed TaskSet 5.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:36.835+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: ResultStage 5 (collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200) finished in 0.098 s
+[2025-07-08T16:11:36.836+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Job 4 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-07-08T16:11:36.837+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO TaskSchedulerImpl: Killing all running tasks in stage 5: Stage finished
+[2025-07-08T16:11:36.837+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO DAGScheduler: Job 4 finished: collect at /opt/bitnami/spark/jobs/process_exercises_job.py:200, took 0.101808 s
+[2025-07-08T16:11:36.838+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO BlockManagerInfo: Removed broadcast_4_piece0 on 172.19.0.8:43687 in memory (size: 30.1 KiB, free: 434.4 MiB)
+[2025-07-08T16:11:36.932+0000] {spark_submit.py:644} INFO - 🎮 Processando 1 arquivos DIS...
+[2025-07-08T16:11:36.968+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:36 INFO InMemoryFileIndex: It took 10 ms to list leaf files for 1 paths.
+[2025-07-08T16:11:37.363+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO FileSourceStrategy: Pushed Filters:
+[2025-07-08T16:11:37.364+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO FileSourceStrategy: Post-Scan Filters:
+[2025-07-08T16:11:37.429+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO CodeGenerator: Code generated in 29.304501 ms
+[2025-07-08T16:11:37.473+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO CodeGenerator: Code generated in 24.526711 ms
+[2025-07-08T16:11:37.479+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO MemoryStore: Block broadcast_8 stored as values in memory (estimated size 203.5 KiB, free 434.0 MiB)
+[2025-07-08T16:11:37.556+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO MemoryStore: Block broadcast_8_piece0 stored as bytes in memory (estimated size 35.7 KiB, free 433.9 MiB)
+[2025-07-08T16:11:37.558+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on 3748f1b8240a:42647 (size: 35.7 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:37.560+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO SparkContext: Created broadcast 8 from count at NativeMethodAccessorImpl.java:0
+[2025-07-08T16:11:37.562+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194304 bytes, open cost is considered as scanning 4194304 bytes.
+[2025-07-08T16:11:37.599+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Registering RDD 28 (count at NativeMethodAccessorImpl.java:0) as input to shuffle 1
+[2025-07-08T16:11:37.629+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Got map stage job 5 (count at NativeMethodAccessorImpl.java:0) with 1 output partitions
+[2025-07-08T16:11:37.628+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Final stage: ShuffleMapStage 6 (count at NativeMethodAccessorImpl.java:0)
+[2025-07-08T16:11:37.630+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Parents of final stage: List()
+[2025-07-08T16:11:37.632+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Missing parents: List()
+[2025-07-08T16:11:37.635+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Submitting ShuffleMapStage 6 (MapPartitionsRDD[28] at count at NativeMethodAccessorImpl.java:0), which has no missing parents
+[2025-07-08T16:11:37.645+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO MemoryStore: Block broadcast_9 stored as values in memory (estimated size 38.2 KiB, free 433.9 MiB)
+[2025-07-08T16:11:37.650+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO MemoryStore: Block broadcast_9_piece0 stored as bytes in memory (estimated size 16.9 KiB, free 433.9 MiB)
+[2025-07-08T16:11:37.730+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on 3748f1b8240a:42647 (size: 16.9 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:37.731+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO SparkContext: Created broadcast 9 from broadcast at DAGScheduler.scala:1585
+[2025-07-08T16:11:37.732+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 6 (MapPartitionsRDD[28] at count at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+[2025-07-08T16:11:37.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO TaskSchedulerImpl: Adding task set 6.0 with 1 tasks resource profile 0
+[2025-07-08T16:11:37.733+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO TaskSetManager: Starting task 0.0 in stage 6.0 (TID 11) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10188 bytes)
+[2025-07-08T16:11:37.745+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on 172.19.0.8:43687 (size: 16.9 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:37.813+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:37 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on 172.19.0.8:43687 (size: 35.7 KiB, free: 434.3 MiB)
+[2025-07-08T16:11:38.239+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 WARN TaskSetManager: Lost task 0.0 in stage 6.0 (TID 11) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:38.240+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:38.241+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:38.242+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.242+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:38.243+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:38.244+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.245+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:38.245+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:38.246+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.247+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:38.248+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:38.249+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.249+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:38.250+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:38.251+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.251+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:38.252+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:38.253+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.254+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:38.254+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:38.255+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:38.256+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:38.257+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:38.257+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:38.258+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:38.259+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:38.260+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.260+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.261+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:38.262+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:38.263+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:38.263+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.264+0000] {spark_submit.py:644} INFO - at org.apache.spark.ContextAwareIterator.hasNext(ContextAwareIterator.scala:39)
+[2025-07-08T16:11:38.265+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.265+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.266+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.fill(Iterator.scala:1211)
+[2025-07-08T16:11:38.267+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.hasNext(Iterator.scala:1217)
+[2025-07-08T16:11:38.267+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:38.268+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach(Iterator.scala:943)
+[2025-07-08T16:11:38.268+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach$(Iterator.scala:943)
+[2025-07-08T16:11:38.269+0000] {spark_submit.py:644} INFO - at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+[2025-07-08T16:11:38.270+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.PythonRDD$.writeIteratorToStream(PythonRDD.scala:322)
+[2025-07-08T16:11:38.271+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$PythonUDFWriterThread.writeIteratorToStream(PythonUDFRunner.scala:58)
+[2025-07-08T16:11:38.271+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+[2025-07-08T16:11:38.272+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+[2025-07-08T16:11:38.273+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+[2025-07-08T16:11:38.274+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:38.274+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 INFO TaskSetManager: Starting task 0.1 in stage 6.0 (TID 12) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10188 bytes)
+[2025-07-08T16:11:38.573+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 INFO TaskSetManager: Lost task 0.1 in stage 6.0 (TID 12) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:38.574+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:38.575+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:38.576+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.576+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:38.577+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:38.578+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.578+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:38.579+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:38.580+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.580+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:38.581+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:38.582+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.582+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:38.583+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:38.584+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.584+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:38.585+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:38.586+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.587+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:38.587+0000] {spark_submit.py:644} INFO - ) [duplicate 1]
+[2025-07-08T16:11:38.588+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 INFO TaskSetManager: Starting task 0.2 in stage 6.0 (TID 13) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10188 bytes)
+[2025-07-08T16:11:38.793+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 INFO TaskSetManager: Lost task 0.2 in stage 6.0 (TID 13) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:38.794+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:38.794+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:38.795+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.796+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:38.796+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:38.796+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.797+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:38.797+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:38.798+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.799+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:38.799+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:38.800+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.800+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:38.801+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:38.801+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.802+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:38.802+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:38.803+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:38.803+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:38.804+0000] {spark_submit.py:644} INFO - ) [duplicate 2]
+[2025-07-08T16:11:38.804+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:38 INFO TaskSetManager: Starting task 0.3 in stage 6.0 (TID 14) (172.19.0.8, executor 0, partition 0, PROCESS_LOCAL, 10188 bytes)
+[2025-07-08T16:11:39.022+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO TaskSetManager: Lost task 0.3 in stage 6.0 (TID 14) on 172.19.0.8, executor 0: org.apache.spark.api.python.PythonException (Traceback (most recent call last):
+[2025-07-08T16:11:39.022+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:39.023+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:39.024+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.024+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:39.025+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:39.025+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.026+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:39.027+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:39.027+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.028+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:39.028+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:39.029+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.029+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:39.030+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:39.030+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.031+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:39.031+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:39.032+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.032+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:39.033+0000] {spark_submit.py:644} INFO - ) [duplicate 3]
+[2025-07-08T16:11:39.033+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 ERROR TaskSetManager: Task 0 in stage 6.0 failed 4 times; aborting job
+[2025-07-08T16:11:39.034+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO TaskSchedulerImpl: Removed TaskSet 6.0, whose tasks have all completed, from pool
+[2025-07-08T16:11:39.034+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO TaskSchedulerImpl: Cancelling stage 6
+[2025-07-08T16:11:39.035+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO TaskSchedulerImpl: Killing all running tasks in stage 6: Stage cancelled: Job aborted due to stage failure: Task 0 in stage 6.0 failed 4 times, most recent failure: Lost task 0.3 in stage 6.0 (TID 14) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:39.035+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:39.036+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:39.036+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.037+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:39.037+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:39.038+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.038+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:39.039+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:39.039+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.040+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:39.040+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:39.041+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.041+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:39.042+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:39.042+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.043+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:39.043+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:39.044+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.045+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:39.045+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:39.045+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:39.046+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:39.046+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:39.047+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:39.047+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:39.048+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:39.048+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.049+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.049+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:39.050+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:39.050+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:39.051+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.051+0000] {spark_submit.py:644} INFO - at org.apache.spark.ContextAwareIterator.hasNext(ContextAwareIterator.scala:39)
+[2025-07-08T16:11:39.052+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.052+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.052+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.fill(Iterator.scala:1211)
+[2025-07-08T16:11:39.053+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.hasNext(Iterator.scala:1217)
+[2025-07-08T16:11:39.053+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.054+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach(Iterator.scala:943)
+[2025-07-08T16:11:39.054+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach$(Iterator.scala:943)
+[2025-07-08T16:11:39.055+0000] {spark_submit.py:644} INFO - at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+[2025-07-08T16:11:39.055+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.PythonRDD$.writeIteratorToStream(PythonRDD.scala:322)
+[2025-07-08T16:11:39.055+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$PythonUDFWriterThread.writeIteratorToStream(PythonUDFRunner.scala:58)
+[2025-07-08T16:11:39.056+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+[2025-07-08T16:11:39.056+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+[2025-07-08T16:11:39.057+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+[2025-07-08T16:11:39.057+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:39.058+0000] {spark_submit.py:644} INFO - Driver stacktrace:
+[2025-07-08T16:11:39.058+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO DAGScheduler: ShuffleMapStage 6 (count at NativeMethodAccessorImpl.java:0) failed in 1.389 s due to Job aborted due to stage failure: Task 0 in stage 6.0 failed 4 times, most recent failure: Lost task 0.3 in stage 6.0 (TID 14) (172.19.0.8 executor 0): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+[2025-07-08T16:11:39.059+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:39.059+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:39.059+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.060+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:39.060+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:39.061+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.061+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:39.061+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:39.062+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.062+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:39.063+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:39.063+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.063+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:39.064+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:39.064+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.065+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:39.065+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:39.065+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.066+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:39.066+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:39.067+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+[2025-07-08T16:11:39.067+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:94)
+[2025-07-08T16:11:39.067+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$$anon$1.read(PythonUDFRunner.scala:75)
+[2025-07-08T16:11:39.068+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+[2025-07-08T16:11:39.068+0000] {spark_submit.py:644} INFO - at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+[2025-07-08T16:11:39.068+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+[2025-07-08T16:11:39.069+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.069+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.069+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+[2025-07-08T16:11:39.070+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+[2025-07-08T16:11:39.070+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+[2025-07-08T16:11:39.070+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.071+0000] {spark_submit.py:644} INFO - at org.apache.spark.ContextAwareIterator.hasNext(ContextAwareIterator.scala:39)
+[2025-07-08T16:11:39.071+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.072+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.072+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.fill(Iterator.scala:1211)
+[2025-07-08T16:11:39.072+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$GroupedIterator.hasNext(Iterator.scala:1217)
+[2025-07-08T16:11:39.073+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+[2025-07-08T16:11:39.073+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach(Iterator.scala:943)
+[2025-07-08T16:11:39.074+0000] {spark_submit.py:644} INFO - at scala.collection.Iterator.foreach$(Iterator.scala:943)
+[2025-07-08T16:11:39.074+0000] {spark_submit.py:644} INFO - at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+[2025-07-08T16:11:39.074+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.PythonRDD$.writeIteratorToStream(PythonRDD.scala:322)
+[2025-07-08T16:11:39.075+0000] {spark_submit.py:644} INFO - at org.apache.spark.sql.execution.python.BasePythonUDFRunner$PythonUDFWriterThread.writeIteratorToStream(PythonUDFRunner.scala:58)
+[2025-07-08T16:11:39.075+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+[2025-07-08T16:11:39.075+0000] {spark_submit.py:644} INFO - at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+[2025-07-08T16:11:39.076+0000] {spark_submit.py:644} INFO - at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+[2025-07-08T16:11:39.076+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:39.076+0000] {spark_submit.py:644} INFO - Driver stacktrace:
+[2025-07-08T16:11:39.102+0000] {spark_submit.py:644} INFO - ❌ Erro DIS s3a://bronze/exercises/CA-SUL-virtual-17RCMe-2025-07-08/simulations/172.19.0.14_2025-07-08/16-06.22/session-pdus_1.bin:
+[2025-07-08T16:11:39.103+0000] {spark_submit.py:644} INFO - An exception was thrown from the Python worker. Please see the stack trace below.
+[2025-07-08T16:11:39.103+0000] {spark_submit.py:644} INFO - Traceback (most recent call last):
+[2025-07-08T16:11:39.104+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1231, in main
+[2025-07-08T16:11:39.104+0000] {spark_submit.py:644} INFO - func, profiler, deserializer, serializer = read_udfs(pickleSer, infile, eval_type)
+[2025-07-08T16:11:39.105+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.105+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 1067, in read_udfs
+[2025-07-08T16:11:39.106+0000] {spark_submit.py:644} INFO - udfs.append(read_single_udf(pickleSer, infile, eval_type, runner_conf, udf_index=i))
+[2025-07-08T16:11:39.106+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.107+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 529, in read_single_udf
+[2025-07-08T16:11:39.108+0000] {spark_submit.py:644} INFO - f, return_type = read_command(pickleSer, infile)
+[2025-07-08T16:11:39.108+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.109+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/worker.py", line 90, in read_command
+[2025-07-08T16:11:39.109+0000] {spark_submit.py:644} INFO - command = serializer._read_with_length(file)
+[2025-07-08T16:11:39.109+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.110+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 174, in _read_with_length
+[2025-07-08T16:11:39.110+0000] {spark_submit.py:644} INFO - return self.loads(obj)
+[2025-07-08T16:11:39.111+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.111+0000] {spark_submit.py:644} INFO - File "/opt/bitnami/spark/python/lib/pyspark.zip/pyspark/serializers.py", line 472, in loads
+[2025-07-08T16:11:39.112+0000] {spark_submit.py:644} INFO - return cloudpickle.loads(obj, encoding=encoding)
+[2025-07-08T16:11:39.112+0000] {spark_submit.py:644} INFO - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-07-08T16:11:39.113+0000] {spark_submit.py:644} INFO - ModuleNotFoundError: No module named 'extractor_dis'
+[2025-07-08T16:11:39.113+0000] {spark_submit.py:644} INFO - 
+[2025-07-08T16:11:39.114+0000] {spark_submit.py:644} INFO - 🎮 Nenhum dado válido processado para DIS
+[2025-07-08T16:11:39.114+0000] {spark_submit.py:644} INFO - ⚡ Encerrando sessão Spark...
+[2025-07-08T16:11:39.115+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO SparkContext: SparkContext is stopping with exitCode 0.
+[2025-07-08T16:11:39.115+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO SparkUI: Stopped Spark web UI at http://3748f1b8240a:4040
+[2025-07-08T16:11:39.116+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO StandaloneSchedulerBackend: Shutting down all executors
+[2025-07-08T16:11:39.116+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Asking each executor to shut down
+[2025-07-08T16:11:39.130+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+[2025-07-08T16:11:39.203+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO MemoryStore: MemoryStore cleared
+[2025-07-08T16:11:39.204+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO BlockManager: BlockManager stopped
+[2025-07-08T16:11:39.207+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO BlockManagerMaster: BlockManagerMaster stopped
+[2025-07-08T16:11:39.211+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+[2025-07-08T16:11:39.223+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO SparkContext: Successfully stopped SparkContext
+[2025-07-08T16:11:39.241+0000] {spark_submit.py:644} INFO - ✅ Processamento concluído com sucesso!
+[2025-07-08T16:11:39.349+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO ShutdownHookManager: Shutdown hook called
+[2025-07-08T16:11:39.350+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO ShutdownHookManager: Deleting directory /tmp/spark-417b2063-5d72-4204-b31e-e06faf99e3bf
+[2025-07-08T16:11:39.355+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO ShutdownHookManager: Deleting directory /tmp/spark-b3b640d9-3b0a-4db5-a113-3651113488c2
+[2025-07-08T16:11:39.360+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO ShutdownHookManager: Deleting directory /tmp/spark-417b2063-5d72-4204-b31e-e06faf99e3bf/pyspark-f0366e04-61ae-422d-96ec-38eeb67a1838
+[2025-07-08T16:11:39.369+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+[2025-07-08T16:11:39.370+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+[2025-07-08T16:11:39.371+0000] {spark_submit.py:644} INFO - 25/07/08 16:11:39 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
+[2025-07-08T16:11:39.600+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2025-07-08T16:11:39.601+0000] {taskinstance.py:361} INFO - Marking task as SUCCESS. dag_id=process_exercises, task_id=process_exercises, run_id=manual__2025-07-08T16:10:47.275410+00:00, execution_date=20250708T161047, start_date=20250708T161051, end_date=20250708T161139
+[2025-07-08T16:11:40.143+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-07-08T16:11:40.180+0000] {taskinstance.py:3924} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-08T16:11:40.297+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

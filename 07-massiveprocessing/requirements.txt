@@ -1,2 +1,6 @@
 pandas
 pyarrow
+# protobuf==5.29.4  #6.31.1
+PyPDF2
+pdfplumber
+pyspark==3.5.5
