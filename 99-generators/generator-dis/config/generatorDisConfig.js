@@ -7,7 +7,7 @@ export const generatorDisConfig = async () => {
     intervalBetweenEspduInMs: 1,
     terminationCheckIntervalMs: 2000,
     applicationSavingIntervalMs: 30000,
-    metricsDir: '../14-metrics/generator-dis',
+    metricsDir: '../98-metrics/generator-dis',
     seed: 123
   }
 

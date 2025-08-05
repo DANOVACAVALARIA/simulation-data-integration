@@ -14,6 +14,9 @@ COPY ./open-dis-python /tmp/open-dis-python
 WORKDIR /tmp/open-dis-python
 RUN pip install --no-cache-dir .
 
+# copia os jars necessários
+COPY ./jars/* /opt/bitnami/spark/jars/
+
 # volta para o diretório de trabalho padrão
 WORKDIR /opt/bitnami/spark
 

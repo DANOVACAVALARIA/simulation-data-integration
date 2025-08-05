@@ -5,13 +5,14 @@ from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from datetime import datetime
 import json
 
-# Configurações
+# configurações
 AWS_CONN_ID = 'minio-ebsim'
 SOURCE_BUCKET = 'bronze'
 SPARK_CONN_ID = 'spark-ebsim'
 
 # JARs necessários
-JARS = ('/opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar,'
+JARS = (
+        '/opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.8.1.jar,'
         '/opt/bitnami/spark/jars/nessie-spark-extensions-3.5_2.12-0.103.2.jar,'
         '/opt/bitnami/spark/jars/nessie-client-0.103.2.jar,'
         '/opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar,'
@@ -23,7 +24,11 @@ default_args = {
     "start_date": datetime(2025, 3, 30),
 }
 
-dag = DAG("process_exercises", default_args=default_args, schedule_interval=None)
+dag = DAG("process_exercises",
+            default_args=default_args,
+            schedule_interval=None,
+            tags=["DIS", "PROTO"]
+            )
 
 
 def identify_ready_exercises(**context):
@@ -105,26 +110,23 @@ def update_manifest_to_processed(**context):
         # processed_ids = {ex['id'] for ex in processed_exercises}
         processed_id = {processed_exercise['id']}
 
-        # Remove exercícios processados de 'created'
+        # remove exercícios processados de 'created'
         manifest['created'] = [
             ex for ex in manifest.get('created', []) 
             # if ex['id'] not in processed_ids
             if ex['id'] not in processed_id
         ]
         
-        # Adiciona exercícios em 'processed'
+        # adiciona exercícios em 'processed'
         if 'processed' not in manifest:
             manifest['processed'] = []
         
-        # for exercise in processed_exercises:
-        #     processed_entry = exercise['manifest_entry'].copy()
-        #     processed_entry['data']['processedAt'] = datetime.now().isoformat()
-        #     manifest['processed'].append(processed_entry)
+        # adiciona campo 'processedAt'
         processed_entry = processed_exercise['manifest_entry'].copy()
         processed_entry['data']['processedAt'] = datetime.now().isoformat()
         manifest['processed'].append(processed_entry)
 
-        # Salva manifest atualizado
+        # salva manifest atualizado
         updated_manifest = json.dumps(manifest, indent=2)
         s3_hook.load_string(
             string_data=updated_manifest,
@@ -133,13 +135,12 @@ def update_manifest_to_processed(**context):
             replace=True
         )
         
-        # print(f"Manifest atualizado: {len(processed_exercises)} exercícios movidos para 'processed'")
         print(f"Exercício {processed_exercise['id']} movido para 'processed'")
     except Exception as e:
         print(f"Erro ao atualizar manifest: {e}")
         raise
 
-# Tasks
+# tasks
 identify_exercises = PythonOperator(
     task_id='identify_ready_exercises',
     python_callable=identify_ready_exercises,
@@ -162,5 +163,5 @@ update_manifest = PythonOperator(
     dag=dag,
 )
 
-# Dependências
+# dependências
 identify_exercises >> process_exercises >> update_manifest

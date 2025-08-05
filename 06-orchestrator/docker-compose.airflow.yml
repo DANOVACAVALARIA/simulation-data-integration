@@ -8,8 +8,9 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ../13-include/jobs:/opt/bitnami/spark/jobs
-    - ../13-include/jars:/opt/bitnami/spark/jars
+    - ../07-massiveprocessing/jobs:/opt/bitnami/spark/jobs
+    - ../07-massiveprocessing/jars:/opt/bitnami/spark/jars
+    - ../98-metrics/nginx:/opt/airflow/nginx
   mem_limit: 2g
   cpus: '2.0'
   networks:
