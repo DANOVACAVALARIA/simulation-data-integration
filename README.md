@@ -1,2 +1,4 @@
-Implementation code for the thesis "Architecture for Integration of Combat Simulation Data
+# simulation-data-integration
+
+Code implementation for the thesis "Architecture for Integration of Combat Simulation Data
 within the Brazilian Army Land Force"
