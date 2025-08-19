@@ -47,5 +47,5 @@ export const swordProto = (rng) => {
   const lengthBuffer = Buffer.alloc(4);
   lengthBuffer.writeUInt32BE(buffer.length, 0);
 
-  return Buffer.concat([lengthBuffer, buffer])
+  return [payload, Buffer.concat([lengthBuffer, buffer])]
 }

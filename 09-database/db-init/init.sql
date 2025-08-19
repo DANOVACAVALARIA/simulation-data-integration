@@ -3,3 +3,4 @@ CREATE DATABASE keycloak_db;
 CREATE DATABASE airflow_db;
 CREATE DATABASE superset_db;
 CREATE DATABASE nessie_db;
+CREATE DATABASE metrics_db;

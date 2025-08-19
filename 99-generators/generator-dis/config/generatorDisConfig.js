@@ -3,7 +3,7 @@ export const generatorDisConfig = async () => {
   const config = {
     udpPort: 3000,
     udpReceiverIp: 'localhost',
-    totalEspduToBeSent: 100,
+    totalEspduToBeSent: 100000,
     intervalBetweenEspduInMs: 1,
     terminationCheckIntervalMs: 2000,
     applicationSavingIntervalMs: 30000,

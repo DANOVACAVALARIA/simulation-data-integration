@@ -21,9 +21,14 @@ let isConnected = false
 
 // metrics (PROTO)
 let packetCount = 0
-const metricsFile = fs.createWriteStream(`${config.metricsDir}/proto-sender-metrics-${execNum}.csv`)
+const metricsFile = fs.createWriteStream(`${config.metricsDir}/metrics/proto-sender-metrics-${execNum}.csv`)
 metricsFile.write('PacketCount,Sent_Time,Encoding_Time,Size_In_Bytes,Msg_Rate\n')
 let metrics = []
+
+// message data (PROTO)
+const messagesFile = fs.createWriteStream(`${config.metricsDir}/messages/proto-sender-msg-${execNum}.csv`)
+messagesFile.write('Context, Client_id, Knowledge_id,Knowledge_group_id,Latitude,Longitude,Altitude,Timestamp\n')
+let messages = []
 
 // create seed
 const rng = seedrandom(config.seed)
@@ -65,14 +70,29 @@ const sendProtoMessage = async () => {
 
     // Send binary data
     socket.send(protoData.encodedProto)
+    
+    // save message
+    messages.push([
+      protoData.payload.context,
+      protoData.payload.clientId,
+      protoData.payload.message.unitKnowledgeUpdate.knowledge.id,
+      protoData.payload.message.unitKnowledgeUpdate.knowledgeGroup.id,
+      protoData.payload.message.unitKnowledgeUpdate.position.latitude,
+      protoData.payload.message.unitKnowledgeUpdate.position.longitude,
+      protoData.payload.message.unitKnowledgeUpdate.height_f,
+      protoData.payload.message.unitKnowledgeUpdate.pertinence,
+    ])
 
     // Termination check
     if (packetCount === config.totalEspduToBeSent) {
       clearInterval(saveMetrics)
       setTimeout(async() => {
-        if (await saveCsvFile(metricsFile, metrics)) {
+        if (await saveCsvFile(metricsFile, metrics) &&
+            await saveCsvFile(messagesFile, messages)) {
           metrics = []
+          messages = []
           metricsFile.end()
+          messagesFile.end()
           
           // Close connection gracefully
           if (socket.readyState === WebSocket.OPEN) {
@@ -91,8 +111,10 @@ const sendProtoMessage = async () => {
 
 // Save metrics periodically
 const saveMetrics = setInterval(async () => {
-  if (await saveCsvFile(metricsFile, metrics)) {
+  if (await saveCsvFile(metricsFile, metrics) &&
+      await saveCsvFile(messagesFile, messages)) {
     metrics = []
+    messages = []
   }
 }, config.applicationSavingIntervalMs)
 

@@ -303,11 +303,30 @@ class ExerciseProcessor:
             raise
 
     def _process_dis_files(self, input_files: List[str], exercise_id: str) -> DataFrame:
-        """Processa arquivos DIS"""
+        """Processa arquivos DIS - CORREÇÃO SIMPLES"""
         try:
-            file_paths = ','.join(input_files)
-            binary_df = self.spark.read.format("binaryFile").load(file_paths)
+            log_info(f"🔧 Processando {len(input_files)} arquivos DIS")
             
+            # CORREÇÃO: Use um padrão que o Spark aceite ou processe individualmente
+            if len(input_files) == 1:
+                # Se é apenas um arquivo, use diretamente
+                file_path = input_files[0]
+                binary_df = self.spark.read.format("binaryFile").load(file_path)
+            else:
+                # Se são múltiplos arquivos, processe um por vez e una os DataFrames
+                dfs = []
+                for file_path in input_files:
+                    filename = file_path.split('/')[-1]
+                    log_info(f"📄 Carregando {filename}")
+                    df = self.spark.read.format("binaryFile").load(file_path)
+                    dfs.append(df)
+                
+                # Una todos os DataFrames
+                binary_df = dfs[0]
+                for df in dfs[1:]:
+                    binary_df = binary_df.union(df)
+            
+            # Resto do processamento continua igual
             processed_df = binary_df.withColumn("pdu_data", extract_dis_udf(col("content"))) \
                 .filter(col("pdu_data").isNotNull() & (size(col("pdu_data")) > 0)) \
                 .select(
@@ -328,14 +347,48 @@ class ExerciseProcessor:
             
             count = processed_df.count()
             if count > 0:
-                log_success(f"Arquivos DIS processados: {count} registros")
+                log_success(f"🎉 Arquivos DIS processados: {count} registros")
                 return processed_df
             else:
                 raise Exception("Nenhum registro DIS extraído")
                 
         except Exception as e:
-            log_error(f"Erro ao processar arquivos DIS: {str(e)}")
+            log_error(f"💥 Erro ao processar arquivos DIS: {str(e)}")
             raise
+    # def _process_dis_files(self, input_files: List[str], exercise_id: str) -> DataFrame:
+    #     """Processa arquivos DIS"""
+    #     try:
+    #         file_paths = ','.join(input_files)
+    #         binary_df = self.spark.read.format("binaryFile").load(file_paths)
+            
+    #         processed_df = binary_df.withColumn("pdu_data", extract_dis_udf(col("content"))) \
+    #             .filter(col("pdu_data").isNotNull() & (size(col("pdu_data")) > 0)) \
+    #             .select(
+    #                 lit(exercise_id).alias("exercise_id"),
+    #                 explode(col("pdu_data")).alias("pdu"),
+    #                 lit(str(datetime.now())).alias("processed_at")
+    #             ).select(
+    #                 "exercise_id",
+    #                 col("pdu.EntityID").alias("entity_id"),
+    #                 col("pdu.ForceID").alias("force_id"),
+    #                 col("pdu.Kind").alias("kind"),
+    #                 col("pdu.Latitude").alias("latitude"),
+    #                 col("pdu.Longitude").alias("longitude"),
+    #                 col("pdu.Altitude").alias("altitude"),
+    #                 col("pdu.Timestamp").alias("timestamp"),
+    #                 "processed_at"
+    #             )
+            
+    #         count = processed_df.count()
+    #         if count > 0:
+    #             log_success(f"Arquivos DIS processados: {count} registros")
+    #             return processed_df
+    #         else:
+    #             raise Exception("Nenhum registro DIS extraído")
+                
+    #     except Exception as e:
+    #         log_error(f"Erro ao processar arquivos DIS: {str(e)}")
+    #         raise
 
     def _process_protobuf_files(self, input_files: List[str], exercise_id: str) -> DataFrame:
         """Processa arquivos Protobuf"""
@@ -397,6 +450,176 @@ class ExerciseProcessor:
         except Exception as e:
             log_error(f"Erro ao salvar tabela {table_name}: {str(e)}")
             raise
+    # def _find_simulation_files(self, bucket: str, sim_path: str) -> Tuple[List[str], str]:
+    #     """Busca arquivos de simulação com logs detalhados para debug"""
+        
+    #     log_info(f"🔍 INICIANDO BUSCA DE ARQUIVOS")
+    #     log_info(f"   Bucket: {bucket}")
+    #     log_info(f"   Caminho: {sim_path}")
+        
+    #     try:
+    #         # Normaliza o caminho
+    #         clean_path = sim_path.rstrip('/')
+    #         full_path = f"s3a://{bucket}/{clean_path}/"
+            
+    #         log_info(f"   Caminho completo: {full_path}")
+    #         log_info(f"   Padrão de busca: {full_path}**")
+            
+    #         # Tentativa de busca recursiva
+    #         log_info("📂 Executando busca recursiva...")
+    #         try:
+    #             all_files = self.spark.read.option("recursiveFileLookup", "true") \
+    #                 .format("binaryFile").load(f"{full_path}**") \
+    #                 .select("path", "length").collect()
+                
+    #             log_info(f"✅ Busca executada com sucesso: {len(all_files)} arquivos encontrados")
+                
+    #         except Exception as search_error:
+    #             log_error(f"❌ Erro na busca recursiva: {str(search_error)}")
+    #             log_info("🔄 Tentando busca alternativa...")
+                
+    #             # Busca alternativa sem recursão
+    #             try:
+    #                 all_files = self.spark.read.format("binaryFile").load(f"{full_path}*") \
+    #                     .select("path", "length").collect()
+    #                 log_info(f"✅ Busca alternativa: {len(all_files)} arquivos encontrados")
+    #             except Exception as alt_error:
+    #                 log_error(f"❌ Busca alternativa também falhou: {str(alt_error)}")
+    #                 raise Exception(f"Não foi possível acessar o diretório: {str(search_error)}")
+
+    #         # Lista todos os arquivos encontrados
+    #         if len(all_files) == 0:
+    #             log_error("📁 NENHUM arquivo encontrado no diretório")
+    #             raise Exception(f"Diretório vazio ou inacessível: {full_path}")
+            
+    #         log_info("📋 ARQUIVOS ENCONTRADOS:")
+    #         for i, row in enumerate(all_files):
+    #             file_path = row.path
+    #             file_size = row.length
+    #             filename = file_path.split('/')[-1]
+    #             log_info(f"   {i+1:2d}. {filename}")
+    #             log_info(f"       Caminho: {file_path}")
+    #             log_info(f"       Tamanho: {file_size:,} bytes")
+
+    #         # Categoriza arquivos
+    #         bin_files = []
+    #         pb_files = []
+    #         other_files = []
+            
+    #         log_info("🔍 CATEGORIZANDO ARQUIVOS:")
+            
+    #         for row in all_files:
+    #             file_path = row.path
+    #             file_size = row.length
+    #             filename = file_path.split('/')[-1].lower()
+                
+    #             # Verifica se o arquivo é válido
+    #             is_valid = True
+    #             status_msgs = []
+                
+    #             if file_size == 0:
+    #                 is_valid = False
+    #                 status_msgs.append("❌ Arquivo vazio")
+    #             elif file_size > Config.MAX_FILE_SIZE:
+    #                 is_valid = False
+    #                 status_msgs.append(f"❌ Muito grande ({file_size:,} > {Config.MAX_FILE_SIZE:,})")
+    #             else:
+    #                 status_msgs.append("✅ Tamanho válido")
+                
+    #             # Categoriza por extensão
+    #             if filename.endswith('.bin'):
+    #                 if is_valid:
+    #                     bin_files.append(file_path)
+    #                     status_msgs.append("🎯 Arquivo DIS (.bin)")
+    #                 else:
+    #                     status_msgs.append("⚠️  Arquivo .bin inválido")
+                        
+    #             elif filename.endswith('.pb'):
+    #                 if is_valid:
+    #                     pb_files.append(file_path)
+    #                     status_msgs.append("🎯 Arquivo Protobuf (.pb)")
+    #                 else:
+    #                     status_msgs.append("⚠️  Arquivo .pb inválido")
+                        
+    #             else:
+    #                 other_files.append(file_path)
+    #                 status_msgs.append("ℹ️  Outro tipo")
+                
+    #             log_info(f"   📄 {filename}: {' | '.join(status_msgs)}")
+
+    #         # Relatório de categorização
+    #         log_info("📊 RELATÓRIO DE CATEGORIZAÇÃO:")
+    #         log_info(f"   🎯 Arquivos .bin válidos: {len(bin_files)}")
+    #         log_info(f"   🎯 Arquivos .pb válidos: {len(pb_files)}")
+    #         log_info(f"   📄 Outros arquivos: {len(other_files)}")
+
+    #         # Lista os arquivos válidos encontrados
+    #         if bin_files:
+    #             log_info("🎯 ARQUIVOS DIS (.bin) VÁLIDOS:")
+    #             for i, bf in enumerate(bin_files):
+    #                 filename = bf.split('/')[-1]
+    #                 log_info(f"   {i+1}. {filename}")
+    #                 log_info(f"      {bf}")
+            
+    #         if pb_files:
+    #             log_info("🎯 ARQUIVOS PROTOBUF (.pb) VÁLIDOS:")
+    #             for i, pf in enumerate(pb_files):
+    #                 filename = pf.split('/')[-1]
+    #                 log_info(f"   {i+1}. {filename}")
+    #                 log_info(f"      {pf}")
+
+    #         # Testa acessibilidade dos arquivos encontrados
+    #         if bin_files:
+    #             log_info("🔬 TESTANDO ACESSIBILIDADE DOS ARQUIVOS .bin:")
+    #             accessible_bin_files = []
+                
+    #             for i, bin_file in enumerate(bin_files):
+    #                 filename = bin_file.split('/')[-1]
+    #                 try:
+    #                     # Tenta ler os metadados do arquivo
+    #                     test_read = self.spark.read.format("binaryFile").load(bin_file) \
+    #                         .select("path", "length").collect()
+                        
+    #                     if test_read and len(test_read) > 0 and test_read[0].length > 0:
+    #                         accessible_bin_files.append(bin_file)
+    #                         log_info(f"   ✅ {i+1}. {filename} - ACESSÍVEL ({test_read[0].length:,} bytes)")
+    #                     else:
+    #                         log_error(f"   ❌ {i+1}. {filename} - SEM DADOS")
+                            
+    #                 except Exception as access_error:
+    #                     log_error(f"   ❌ {i+1}. {filename} - ERRO: {str(access_error)}")
+                
+    #             if accessible_bin_files:
+    #                 log_success(f"🎉 SUCESSO: {len(accessible_bin_files)} arquivos DIS acessíveis encontrados!")
+    #                 return accessible_bin_files, "DIS"
+    #             else:
+    #                 log_error("💥 FALHA: Nenhum arquivo .bin acessível!")
+                    
+    #         if pb_files:
+    #             log_info("🔬 Arquivos .pb encontrados, usando Protobuf")
+    #             return pb_files, "PROTO"
+            
+    #         # Se chegou aqui, não encontrou arquivos válidos
+    #         log_error("💥 FALHA FINAL: Nenhum arquivo de simulação válido encontrado!")
+    #         log_info("🔍 RESUMO DO QUE FOI ENCONTRADO:")
+    #         log_info(f"   Total de arquivos: {len(all_files)}")
+    #         log_info(f"   Arquivos .bin: {len([f for f in all_files if f.path.lower().endswith('.bin')])}")
+    #         log_info(f"   Arquivos .pb: {len([f for f in all_files if f.path.lower().endswith('.pb')])}")
+    #         log_info(f"   Outros arquivos: {len(other_files)}")
+            
+    #         # Lista alguns exemplos de outros arquivos para debug
+    #         if other_files:
+    #             log_info("📄 EXEMPLOS DE OUTROS ARQUIVOS:")
+    #             for i, of in enumerate(other_files[:5]):
+    #                 filename = of.split('/')[-1]
+    #                 log_info(f"   {i+1}. {filename}")
+            
+    #         raise Exception(f"Nenhum arquivo de simulação (.bin/.pb) válido encontrado em {full_path}")
+            
+    #     except Exception as e:
+    #         log_error(f"💥 ERRO CRÍTICO na busca de arquivos: {str(e)}")
+    #         raise
+
 
     def _find_simulation_files(self, bucket: str, sim_path: str) -> Tuple[List[str], str]:
         """Busca arquivos de simulação"""

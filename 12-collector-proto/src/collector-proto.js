@@ -109,7 +109,7 @@ wss.on('connection', (socket, request) => {
 
         if (isTerminated) session = null
       }
-    }, 30000) // 30 second delay
+    }, 10000) // 10 second delay
   })
 
   // Handle errors

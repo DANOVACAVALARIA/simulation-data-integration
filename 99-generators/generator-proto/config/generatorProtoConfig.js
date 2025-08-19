@@ -3,8 +3,8 @@ export const generatorProtoConfig = async () => {
   const config = {
     wsDestHost: 'proto.local',
     wsDestPort: 80,
-    totalEspduToBeSent: 10,
-    intervalBetweenProtoMsgInMs: 1000,
+    totalEspduToBeSent: 20000,
+    intervalBetweenProtoMsgInMs: 1,
     terminationCheckIntervalMs: 2000,
     applicationSavingIntervalMs: 30000,
     metricsDir: '../98-metrics/generator-proto',

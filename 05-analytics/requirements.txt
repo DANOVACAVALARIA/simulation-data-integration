@@ -1,4 +1,5 @@
 sqlalchemy_dremio
+psycopg2-binary
 # pyarrow
 # pyodbc
 # Pillow

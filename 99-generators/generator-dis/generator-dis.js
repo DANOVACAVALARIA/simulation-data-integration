@@ -21,9 +21,14 @@ const client = dgram.createSocket('udp4')
 
 // metrics (DIS)
 let packetCount = 0
-const metricsFile = fs.createWriteStream(`${config.metricsDir}/dis-sender-metrics-${execNum}.csv`)
+const metricsFile = fs.createWriteStream(`${config.metricsDir}/metrics/dis-sender-metrics-${execNum}.csv`)
 metricsFile.write('PacketCount,Sent_Time,Encoding_Time,Size_In_Bytes,Msg_Rate\n')
 let metrics = []
+
+// message data (DIS)
+const messagesFile = fs.createWriteStream(`${config.metricsDir}/messages/dis-sender-msg-${execNum}.csv`)
+messagesFile.write('Force,ID,Kind,Domain,Country,Category,Timestamp,Location_X,Location_Y,Location_Z\n')
+let messages = []
 
 // create seed
 const rng = seedrandom(config.seed)
@@ -43,13 +48,30 @@ const sendESPDU = async () => {
     }
   })
 
+  // save message
+  messages.push([
+     pduData.payload.forceId,
+     pduData.payload.entityID.entity,
+     pduData.payload.entityType.entityKind,
+     pduData.payload.entityType.domain,
+     pduData.payload.entityType.country,
+     pduData.payload.entityType.category,
+     pduData.payload.timestamp,
+     pduData.payload.entityLocation.x,
+     pduData.payload.entityLocation.y,
+     pduData.payload.entityLocation.z
+  ])
+
   // ---termination check
   if (packetCount == config.totalEspduToBeSent) {
     clearInterval(saveMetrics)
     setTimeout(async() => {
-      if(await saveCsvFile(metricsFile, metrics)) {
+      if (await saveCsvFile(metricsFile, metrics) &&
+          await saveCsvFile(messagesFile, messages)) {
         metrics = []
+        messages = []
         metricsFile.end()
+        messagesFile.end()
         client.close(() => {
           console.log('DIS-GENERATOR HAS FINISHED')
           process.exit(0)
@@ -61,8 +83,10 @@ const sendESPDU = async () => {
 
 // ---save metrics
 const saveMetrics = setInterval(async () => {
-  if (await saveCsvFile(metricsFile, metrics)) {
+  if (await saveCsvFile(metricsFile, metrics) &&
+      await saveCsvFile(messagesFile, messages)) {
     metrics = []
+    messages = []
   }
 }, config.applicationSavingIntervalMs)
 
